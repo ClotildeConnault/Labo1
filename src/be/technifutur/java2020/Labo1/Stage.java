@@ -2,6 +2,8 @@ package be.technifutur.java2020.Labo1;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class Stage {
@@ -11,9 +13,11 @@ public class Stage {
     private LocalTime heureDebut;
     private LocalDate dateFin;
     private LocalTime heureFin;
+    private List<Inscrit> inscrits;
 
     public Stage(String name){
         this.name = name;
+        inscrits = new ArrayList<Inscrit>();
     }
 
     public void setDateDebut(int year, int month, int day){
@@ -46,6 +50,10 @@ public class Stage {
 
     public LocalTime getHeureFin(){
         return heureFin;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
 

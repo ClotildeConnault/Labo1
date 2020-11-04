@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-public class Model {
+public class StageList {
 
     private HashMap<Integer, Stage> stages = new HashMap<Integer, Stage>();
 

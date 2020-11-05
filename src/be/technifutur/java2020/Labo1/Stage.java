@@ -1,18 +1,14 @@
 package be.technifutur.java2020.Labo1;
 
 import java.time.DateTimeException;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 
-public class Stage extends Evenement{
+public class Stage extends Event {
 
     private LocalDateTime dateFin;
-    private HashMap<Integer, Activite> activites;
+    private HashMap<Integer, Activity> activites;
    // private List<Inscrit> inscrits;
 
     public Stage(String name){

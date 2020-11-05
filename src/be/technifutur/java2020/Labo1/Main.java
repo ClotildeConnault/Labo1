@@ -13,13 +13,12 @@ public class Main {
         vue.setModel(stageList);
 
     controler.creationStage();
-        controler.creationStage();
-        controler.creationStage();
 
         vue.afficheStages();
-
 
     }
 
 
 }
+
+

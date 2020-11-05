@@ -6,12 +6,12 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
-public abstract class Evenement {
+public abstract class Event {
     protected String name;
     protected LocalDateTime dateDebut;
 
 
-    public Evenement(String name){
+    public Event(String name){
         this.name = name;
     }
 

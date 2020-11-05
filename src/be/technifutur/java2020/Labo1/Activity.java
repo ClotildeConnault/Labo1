@@ -1,10 +1,10 @@
 package be.technifutur.java2020.Labo1;
 
-public class Activite extends Evenement{
+public class Activity extends Event {
 
     private int duree;
 
-    public Activite(String name) {
+    public Activity(String name) {
         super(name);
     }
 

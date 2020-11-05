@@ -1,49 +1,46 @@
 package be.technifutur.java2020.Labo1;
 
 import java.time.LocalDateTime;
-import java.util.HashMap;
 import java.util.TreeMap;
 
 public abstract class List {
 
+    protected TreeMap<String, Stage> list;
 
-   /*
+    public List(EventType type) {
+        switch (type) {
+            case STAGE :
+                list = new TreeMap<String, Stage>();
+                break;
+            case ACTIVITY:
+                list = new TreeMap<String, Stage>();
+                break;
+        }
+    }
+
     public abstract void add(String name);
 
-    public HashMap<Integer, ? extends Evenement> getEvenements(){
+    public TreeMap<String, ? extends Event> getList(){
         return list;
     }
+
     public void removeStage() {
 
     }
 
-    public void setName (Integer key, String name) {
+    public void setName (String key, String name) {
         list.get(key).setName(name);
     }
 
-    public void setDateDebut (Integer key, int year, int month, int day) {
-        list.get(key).setDateDebut(year, month, day);
+    public abstract void setDateFin (String key, int year, int month, int day, int hour, int min);
+
+    public void setDateDebut (String key, int year, int month, int day, int hour, int min) {
+        list.get(key).setDateDebut(year, month, day, hour, min);
     }
 
-
-
-    public void setHeureDebut(Integer key, int hour, int minute){
-        list.get(key).setHeureDebut(hour, minute);
+    public LocalDateTime getDateDebut(String key) {
+        return list.get(key).getDateDebut();
     }
 
-
-
-    public LocalDateTime getDateDebut(Integer key) {
-        LocalDateTime dateDebut = LocalDateTime.of(
-                list.get(key).getDateDebut().getYear(),
-                list.get(key).getDateDebut().getMonth(),
-                list.get(key).getDateDebut().getDayOfMonth(),
-                list.get(key).getHeureDebut().getHour(),
-                list.get(key).getHeureDebut().getMinute()
-        );
-
-        return dateDebut;
-    }
-*/
 
 }

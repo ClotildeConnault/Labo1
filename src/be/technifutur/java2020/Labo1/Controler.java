@@ -102,3 +102,4 @@ public class Controler {
 //TODO créer un menu
 //TODO créer un contrôleur par type d'action (créer, supprimer, etc)
 //TODO créer une classe ActiviteList, la faire descendre de List (StageList aussi)
+//TODO revoir "optional" -> peut renvoyer quelque chose ou non

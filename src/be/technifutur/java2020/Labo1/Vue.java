@@ -1,9 +1,7 @@
 package be.technifutur.java2020.Labo1;
 
 import java.time.format.DateTimeFormatter;
-import java.util.Iterator;
 import java.util.Map;
-import java.util.TreeMap;
 
 public class Vue {
 
@@ -21,7 +19,7 @@ public class Vue {
         System.out.println("nom du stage" + "   " + "début du stage" + "   " + "fin du stage");
 
 
-        for (Map.Entry<String, Stage> entry : stageList.getStages().entrySet()) {
+        for (Map.Entry<String, ? extends Event> entry : stageList.getList().entrySet()) {
             System.out.print(
                     entry.getKey() + " " +
                     stageList.getDateDebut(entry.getKey()).format(formatter) + " " +
@@ -35,7 +33,7 @@ public class Vue {
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
         System.out.println(
-                        this.stageList.getStages().get(key).getName() + " " +
+                        this.stageList.getList().get(key).getName() + " " +
                         this.stageList.getDateDebut(key).format(formatter) + " " +
                         this.stageList.getDateFin(key).format(formatter) + "\n"
         );

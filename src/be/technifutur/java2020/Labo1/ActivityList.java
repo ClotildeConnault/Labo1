@@ -1,23 +1,22 @@
 package be.technifutur.java2020.Labo1;
 
-import java.time.LocalDateTime;
 import java.util.TreeMap;
 
-public class ActiviteList {
+public class ActivityList {
 
 
-    private TreeMap<String, Activite> list;
+    private TreeMap<String, Activity> list;
 
-    public ActiviteList() {
-        list = new TreeMap<String, Activite>();
+    public ActivityList() {
+        list = new TreeMap<String, Activity>();
     }
 
-    public TreeMap<String, Activite> getActivites(){
+    public TreeMap<String, Activity> getActivites(){
         return list;
     }
 
     public void add(String name) {
-        this.list.put(name, new Activite(name)); //TODO message si clé déjà existante
+        this.list.put(name, new Activity(name)); //TODO message si clé déjà existante
     }
 
     public void remove() {

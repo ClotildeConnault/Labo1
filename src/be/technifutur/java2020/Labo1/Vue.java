@@ -1,6 +1,9 @@
 package be.technifutur.java2020.Labo1;
 
 import java.time.format.DateTimeFormatter;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class Vue {
 
@@ -16,23 +19,52 @@ public class Vue {
         System.out.println("Liste des stages");
         System.out.println();
         System.out.println("nom du stage" + "   " + "début du stage" + "   " + "fin du stage");
-        for (Integer key : this.stageList.getStages().keySet()) {
+
+
+        for (Map.Entry<String, Stage> entry : stageList.getStages().entrySet()) {
             System.out.print(
-                    key + " " +
-                    this.stageList.getStages().get(key).getName() + " " +
-                    this.stageList.getDateDebut(key).format(formatter) + " " +
-                            this.stageList.getDateFin(key).format(formatter)
+                    entry.getKey() + " " +
+                    stageList.getDateDebut(entry.getKey()).format(formatter) + " " +
+                            stageList.getDateFin(entry.getKey()).format(formatter)
             );
             System.out.println();
         }
     }
 
-    public void afficheStage(Integer key) {
+    public void afficheStage(String key) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
-        System.out.print(
+        System.out.println(
                         this.stageList.getStages().get(key).getName() + " " +
                         this.stageList.getDateDebut(key).format(formatter) + " " +
-                        this.stageList.getDateFin(key).format(formatter)
+                        this.stageList.getDateFin(key).format(formatter) + "\n"
         );
+    }
+
+    public void consigneCreaStage() {
+        System.out.println("Création d'un nouveau stage\n");
+    }
+
+    public void consigneDateDebut() {
+        System.out.println("Entrez une date de début pour le stage (format aaaa mm jj)");
+    }
+
+    public void consigneDateFin() {
+        System.out.println("Entrez une date de fin pour le stage (format aaaa mm jj)");
+    }
+
+    public void consigneHeureDebut() {
+        System.out.println("Entrez une heure de début pour le stage (format hh mm)");
+    }
+
+    public void consigneHeureFin() {
+        System.out.println("Entrez une date de fin pour le stage (format aaaa mm jj)");
+    }
+
+    public void consigneNomStage() {
+        System.out.println("Entrez le nom du stage");
+    }
+
+    public void succes() {
+        System.out.print("Création réussie ");
     }
 }

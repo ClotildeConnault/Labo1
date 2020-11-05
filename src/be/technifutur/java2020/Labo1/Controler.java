@@ -24,10 +24,10 @@ public class Controler {
     public void creationStage(){
 
         Scanner scan = new Scanner(System.in);
-        System.out.println("Création d'un nouveau stage");
-        System.out.println("Entrez le nom du stage");
-        stageList.addStage(scan.nextLine());
-        Integer key = stageList.getStages().size();
+        vue.consigneCreaStage();
+        vue.consigneNomStage();
+        String key = scan.nextLine();
+        stageList.add(key);
         boolean dateTimeException = false;
         boolean patternSyntaxException = false;
         String input = null;
@@ -37,7 +37,7 @@ public class Controler {
             try {
                 do {
                     patternSyntaxException = false;
-                    System.out.println("Entrez une date de début pour le stage (format aaaa mm jj)");
+                    vue.consigneDateDebut();
                     input = scan.nextLine();
                     try {
                         isDateFormatValid(input);
@@ -56,7 +56,7 @@ public class Controler {
 
                 do {
                     patternSyntaxException = false;
-                    System.out.println("Entrez une heure de début pour le stage (format hh mm)");
+                    vue.consigneHeureDebut();
                     input = scan.nextLine();
                     try {
                         isHourFormatValid(input);
@@ -85,7 +85,7 @@ public class Controler {
             try {
                 do {
                     patternSyntaxException = false;
-                    System.out.println("Entrez une date de fin pour le stage (format aaaa mm jj)");
+                    vue.consigneDateFin();
                     input = scan.nextLine();
                     try {
                         isDateFormatValid(input);
@@ -104,7 +104,7 @@ public class Controler {
 
                 do {
                     patternSyntaxException = false;
-                    System.out.println("Entrez une heure de fin pour le stage (format hh mm)");
+                    vue.consigneHeureFin();
                     input = scan.nextLine();
                     try {
                         isHourFormatValid(input);
@@ -128,7 +128,7 @@ public class Controler {
 
         } while (dateTimeException);
 
-        System.out.print("Création réussie ");
+        vue.succes();
         vue.afficheStage(key);
 
     }

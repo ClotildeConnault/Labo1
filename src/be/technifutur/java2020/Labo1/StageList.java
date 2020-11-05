@@ -1,70 +1,82 @@
 package be.technifutur.java2020.Labo1;
 
+import com.sun.source.tree.Tree;
+
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class StageList {
 
-    private HashMap<Integer, Stage> stages = new HashMap<Integer, Stage>();
+    private TreeMap<String, Stage> list;
 
-    public void addStage(String name) {
-        stages.put(stages.size()+1, new Stage(name));
+    public StageList() {
+        list = new TreeMap<String, Stage>();
     }
 
-    public HashMap<Integer, Stage> getStages(){
-        return stages;
+    public void add(String name) {
+        this.list.put(name, new Stage(name)); //TODO message si clé déjà existante
     }
+
+    public TreeMap<String, Stage> getStages(){
+        return list;
+    }
+
     public void removeStage() {
 
     }
 
-    public void setName (Integer key, String name) {
-        stages.get(key).setName(name);
+    public void setName (String key, String name) {
+        list.get(key).setName(name);
     }
 
-    public void setDateDebut (Integer key, int year, int month, int day) {
-        stages.get(key).setDateDebut(year, month, day);
+    public void setDateDebut (String key, int year, int month, int day) {
+        list.get(key).setDateDebut(year, month, day);
     }
 
-    public void setDateFin(Integer key, int year, int month, int day){
-        stages.get(key).setDateFin(year, month, day);
+
+
+    public void setHeureDebut(String key, int hour, int minute){
+        list.get(key).setHeureDebut(hour, minute);
     }
 
-    public void setHeureDebut(Integer key, int hour, int minute){
-        stages.get(key).setHeureDebut(hour, minute);
-    }
 
-    public void setHeureFin(Integer key, int hour, int minute){
-        stages.get(key).setHeureFin(hour, minute);
-    }
 
-    public LocalDateTime getDateDebut(Integer key) {
+    public LocalDateTime getDateDebut(String key) {
         LocalDateTime dateDebut = LocalDateTime.of(
-                stages.get(key).getDateDebut().getYear(),
-                stages.get(key).getDateDebut().getMonth(),
-                stages.get(key).getDateDebut().getDayOfMonth(),
-                stages.get(key).getHeureDebut().getHour(),
-                stages.get(key).getHeureDebut().getMinute()
+                list.get(key).getDateDebut().getYear(),
+                list.get(key).getDateDebut().getMonth(),
+                list.get(key).getDateDebut().getDayOfMonth(),
+                list.get(key).getHeureDebut().getHour(),
+                list.get(key).getHeureDebut().getMinute()
         );
 
         return dateDebut;
     }
 
-    public LocalDateTime getDateFin(Integer key) {
-        LocalDateTime dateDebut = LocalDateTime.of(
-                stages.get(key).getDateFin().getYear(),
-                stages.get(key).getDateFin().getMonth(),
-                stages.get(key).getDateFin().getDayOfMonth(),
-                stages.get(key).getHeureFin().getHour(),
-                stages.get(key).getHeureFin().getMinute()
+    public void setDateFin(String key, int year, int month, int day){
+        list.get(key).setDateFin(year, month, day);
+    }
+
+
+
+    public void setHeureFin(String key, int hour, int minute){
+        list.get(key).setHeureFin(hour, minute);
+    }
+
+
+
+    public LocalDateTime getDateFin(String key) {
+        LocalDateTime dateFin = LocalDateTime.of(
+                list.get(key).getDateFin().getYear(),
+                list.get(key).getDateFin().getMonth(),
+                list.get(key).getDateFin().getDayOfMonth(),
+                list.get(key).getHeureFin().getHour(),
+                list.get(key).getHeureFin().getMinute()
         );
 
-        return dateDebut;
+        return dateFin;
     }
 
 }

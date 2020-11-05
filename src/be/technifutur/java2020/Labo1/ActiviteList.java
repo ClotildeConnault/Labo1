@@ -1,21 +1,30 @@
 package be.technifutur.java2020.Labo1;
 
 import java.time.LocalDateTime;
-import java.util.HashMap;
+import java.util.TreeMap;
 
-public abstract class List {
+public class ActiviteList {
 
-   /*
-    public abstract void add(String name);
 
-    public HashMap<Integer, ? extends Evenement> getEvenements(){
+    private TreeMap<String, Activite> list;
+
+    public ActiviteList() {
+        list = new TreeMap<String, Activite>();
+    }
+
+    public TreeMap<String, Activite> getActivites(){
         return list;
     }
-    public void removeStage() {
+
+    public void add(String name) {
+        this.list.put(name, new Activite(name)); //TODO message si clé déjà existante
+    }
+
+    public void remove() {
 
     }
 
-    public void setName (Integer key, String name) {
+    public void setName (Integer key, String name) { // à enlever?
         list.get(key).setName(name);
     }
 
@@ -42,6 +51,5 @@ public abstract class List {
 
         return dateDebut;
     }
-*/
 
 }

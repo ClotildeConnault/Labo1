@@ -32,6 +32,7 @@ public class Vue {
     }
 
     public void afficheStage(String key) {
+
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
         System.out.println(
                         this.stageList.getStages().get(key).getName() + " " +
@@ -45,19 +46,11 @@ public class Vue {
     }
 
     public void consigneDateDebut() {
-        System.out.println("Entrez une date de début pour le stage (format aaaa mm jj)");
+        System.out.println("Entrez une date et une heure de début pour le stage (format aaaa mm jj hh mm)");
     }
 
     public void consigneDateFin() {
-        System.out.println("Entrez une date de fin pour le stage (format aaaa mm jj)");
-    }
-
-    public void consigneHeureDebut() {
-        System.out.println("Entrez une heure de début pour le stage (format hh mm)");
-    }
-
-    public void consigneHeureFin() {
-        System.out.println("Entrez une date de fin pour le stage (format aaaa mm jj)");
+        System.out.println("Entrez une date et une heure de fin pour le stage (format aaaa mm jj hh mm)");
     }
 
     public void consigneNomStage() {

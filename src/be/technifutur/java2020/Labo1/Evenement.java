@@ -2,35 +2,28 @@ package be.technifutur.java2020.Labo1;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
 public abstract class Evenement {
     protected String name;
-    protected LocalDate dateDebut;
-    protected LocalTime heureDebut;
+    protected LocalDateTime dateDebut;
+
 
     public Evenement(String name){
         this.name = name;
     }
 
-    public void setDateDebut(int year, int month, int day) throws DateTimeException {
-        dateDebut = LocalDate.of(year, month, day);
-        if (dateDebut.isBefore(LocalDate.now())) {
+    public void setDateDebut(int year, int month, int day, int hour, int min) throws DateTimeException {
+        dateDebut = LocalDateTime.of(year, month, day, hour, min);
+        if (dateDebut.isBefore(LocalDateTime.now())) {
             throw new DateTimeException("La date ne peut pas être antérieure à aujourd'hui");
         }
     }
 
-    public LocalDate getDateDebut(){
+    public LocalDateTime getDateDebut(){
         return dateDebut;
-    }
-
-    public void setHeureDebut(int hour, int minute){
-        heureDebut = LocalTime.of(hour, minute);
-    }
-
-    public LocalTime getHeureDebut(){
-        return heureDebut;
     }
 
     public void setName(String name) {

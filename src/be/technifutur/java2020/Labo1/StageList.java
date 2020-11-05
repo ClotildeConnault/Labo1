@@ -31,52 +31,24 @@ public class StageList {
         list.get(key).setName(name);
     }
 
-    public void setDateDebut (String key, int year, int month, int day) {
-        list.get(key).setDateDebut(year, month, day);
+    public void setDateDebut (String key, int year, int month, int day, int hour, int min) {
+        list.get(key).setDateDebut(year, month, day, hour, min);
     }
 
 
+    public void setDateFin(String key, int year, int month, int day, int hour, int min){
 
-    public void setHeureDebut(String key, int hour, int minute){
-        list.get(key).setHeureDebut(hour, minute);
+        list.get(key).setDateFin(year, month, day, hour, min);
     }
-
-
 
     public LocalDateTime getDateDebut(String key) {
-        LocalDateTime dateDebut = LocalDateTime.of(
-                list.get(key).getDateDebut().getYear(),
-                list.get(key).getDateDebut().getMonth(),
-                list.get(key).getDateDebut().getDayOfMonth(),
-                list.get(key).getHeureDebut().getHour(),
-                list.get(key).getHeureDebut().getMinute()
-        );
-
-        return dateDebut;
+        return list.get(key).getDateDebut();
     }
-
-    public void setDateFin(String key, int year, int month, int day){
-        list.get(key).setDateFin(year, month, day);
-    }
-
-
-
-    public void setHeureFin(String key, int hour, int minute){
-        list.get(key).setHeureFin(hour, minute);
-    }
-
-
 
     public LocalDateTime getDateFin(String key) {
-        LocalDateTime dateFin = LocalDateTime.of(
-                list.get(key).getDateFin().getYear(),
-                list.get(key).getDateFin().getMonth(),
-                list.get(key).getDateFin().getDayOfMonth(),
-                list.get(key).getHeureFin().getHour(),
-                list.get(key).getHeureFin().getMinute()
-        );
-
-        return dateFin;
+        return list.get(key).getDateFin();
     }
+
+
 
 }

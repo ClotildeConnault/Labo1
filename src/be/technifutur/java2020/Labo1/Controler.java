@@ -10,8 +10,7 @@ public class Controler {
 
     private StageList stageList;
     private Vue vue;
-    private Pattern datePattern = Pattern.compile("[0-9][0-9][0-9][0-9]\\h[0-1][0-9]\\h[0-3][0-9]");
-    private Pattern hourPattern = Pattern.compile("[0-2][0-9]\\h[0-6][0-9]");
+    private Pattern datePattern = Pattern.compile("[0-9][0-9][0-9][0-9]\\h[0-1][0-9]\\h[0-3][0-9]\\h[0-9][0-9]\\h[0-9][0-9]");
 
     public void setModel(StageList stageList) {
         this.stageList = stageList;
@@ -51,27 +50,11 @@ public class Controler {
                         key,
                         Integer.valueOf(input.substring(0, 4)),
                         Integer.valueOf(input.substring(5, 7)),
-                        Integer.valueOf(input.substring(8))
+                        Integer.valueOf(input.substring(8, 10)),
+                        Integer.valueOf(input.substring(11, 13)),
+                        Integer.valueOf(input.substring(14))
                 );
 
-                do {
-                    patternSyntaxException = false;
-                    vue.consigneHeureDebut();
-                    input = scan.nextLine();
-                    try {
-                        isHourFormatValid(input);
-                    } catch (PatternSyntaxException e) {
-                        patternSyntaxException = true;
-                        System.out.println(e);
-                    }
-
-                } while (patternSyntaxException);
-
-                stageList.setHeureDebut(
-                        key,
-                        Integer.valueOf(input.substring(0, 2)),
-                        Integer.valueOf(input.substring(3))
-                );
 
             } catch (DateTimeException e){
                 dateTimeException = true;
@@ -99,27 +82,12 @@ public class Controler {
                         key,
                         Integer.valueOf(input.substring(0, 4)),
                         Integer.valueOf(input.substring(5, 7)),
-                        Integer.valueOf(input.substring(8))
+                        Integer.valueOf(input.substring(8, 10)),
+                        Integer.valueOf(input.substring(11, 13)),
+                        Integer.valueOf(input.substring(14))
                 );
 
-                do {
-                    patternSyntaxException = false;
-                    vue.consigneHeureFin();
-                    input = scan.nextLine();
-                    try {
-                        isHourFormatValid(input);
-                    } catch (PatternSyntaxException e) {
-                        patternSyntaxException = true;
-                        System.out.println(e);
-                    }
 
-                } while (patternSyntaxException);
-
-                stageList.setHeureFin(
-                        key,
-                        Integer.valueOf(input.substring(0, 2)),
-                        Integer.valueOf(input.substring(3))
-                );
 
             } catch (DateTimeException e){
                 dateTimeException = true;
@@ -136,18 +104,11 @@ public class Controler {
     private boolean isDateFormatValid(String input) throws PatternSyntaxException {
         Matcher matcher = this.datePattern.matcher(input);
         if (!matcher.matches()) {
-            throw new PatternSyntaxException("La date saisie n'est pas conforme au format (aaaa mm jj)", input, -1);
+            throw new PatternSyntaxException("La date saisie n'est pas conforme au format (aaaa mm jj hh mm)", input, -1);
         }
         return matcher.matches();
     }
 
-    private boolean isHourFormatValid(String input) throws PatternSyntaxException {
-        Matcher matcher = this.hourPattern.matcher(input);
-        if (!matcher.matches()) {
-            throw new PatternSyntaxException("L'heure saisie n'est pas conforme au format (hh mm)", input, -1);
-        }
-        return matcher.matches();
-    }
 }
 //TODO virer le double de la boucle do while dégueulasse
 //TODO gérer les exceptions quand la date début et fin est la même

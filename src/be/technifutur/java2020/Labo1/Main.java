@@ -1,5 +1,7 @@
 package be.technifutur.java2020.Labo1;
 
+import java.util.TreeMap;
+
 public class Main {
     public static void main(String[] args) {
         Vue vue = new Vue();
@@ -15,11 +17,6 @@ public class Main {
         controler.creationStage();
 
         vue.afficheStages();
-
-
-
-
-
 
 
     }

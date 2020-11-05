@@ -36,7 +36,7 @@ public class StageList {
     }
 
 
-    public void setDateFin(String key, int year, int month, int day, int hour, int min){
+    public void setDateFin(String key, int year, int month, int day, int hour, int min) throws DateTimeException {
 
         list.get(key).setDateFin(year, month, day, hour, min);
     }

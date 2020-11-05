@@ -21,9 +21,12 @@ public class Stage extends Evenement{
     }
 
     public void setDateFin(int year, int month, int day, int hour, int min) throws DateTimeException {
-        dateFin = LocalDateTime.of(year, month, day, hour, min);
-        if (dateFin.isBefore(this.dateDebut)) {
+        LocalDateTime date = LocalDateTime.of(year, month, day, hour, min);
+        if (date.isBefore(this.dateDebut)) {
             throw new DateTimeException("La date de fin est incohérente par rapport à la date de début");
+        }
+        else {
+            dateFin = date;
         }
     }
 

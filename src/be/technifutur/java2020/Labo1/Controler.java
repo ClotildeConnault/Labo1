@@ -28,23 +28,15 @@ public class Controler {
         String key = scan.nextLine();
         stageList.add(key);
         boolean dateTimeException = false;
-        boolean patternSyntaxException = false;
         String input = null;
 
         do {
             dateTimeException = false;
             try {
                 do {
-                    patternSyntaxException = false;
                     vue.consigneDateDebut();
                     input = scan.nextLine();
-                    try {
-                        isDateFormatValid(input);
-                    } catch (PatternSyntaxException e) {
-                        patternSyntaxException = true;
-                        System.out.println(e);
-                    }
-                } while (patternSyntaxException);
+                } while (!isDateFormatValid(input));
 
                 stageList.setDateDebut(
                         key,
@@ -67,16 +59,9 @@ public class Controler {
             dateTimeException = false;
             try {
                 do {
-                    patternSyntaxException = false;
                     vue.consigneDateFin();
                     input = scan.nextLine();
-                    try {
-                        isDateFormatValid(input);
-                    } catch (PatternSyntaxException e) {
-                        patternSyntaxException = true;
-                        System.out.println(e);
-                    }
-                } while (patternSyntaxException);
+                } while (!isDateFormatValid(input));
 
                 stageList.setDateFin(
                         key,
@@ -103,15 +88,17 @@ public class Controler {
 
     private boolean isDateFormatValid(String input) throws PatternSyntaxException {
         Matcher matcher = this.datePattern.matcher(input);
+        boolean isValid = true;
+
         if (!matcher.matches()) {
-            throw new PatternSyntaxException("La date saisie n'est pas conforme au format (aaaa mm jj hh mm)", input, -1);
+            System.out.println("La date saisie n'est pas conforme au format (aaaa mm jj hh mm)");
+            isValid = false;
         }
-        return matcher.matches();
+        return isValid;
     }
 
 }
-//TODO virer le double de la boucle do while dégueulasse
-//TODO gérer les exceptions quand la date début et fin est la même
+
 //TODO créer un menu
 //TODO créer un contrôleur par type d'action (créer, supprimer, etc)
 //TODO créer une classe ActiviteList, la faire descendre de List (StageList aussi)

@@ -1,7 +1,7 @@
 package be.technifutur.java2020.Labo1;
 
-import java.util.Map;
-import java.util.Scanner;
+import be.technifutur.java2020.Labo1.stage.Stage;
+
 import java.util.TreeMap;
 
 public class MenuPrincipal extends Menu {
@@ -25,14 +25,6 @@ public class MenuPrincipal extends Menu {
     }
 
 
-
-    public String getChoice() {
-        input = scan.nextLine().toUpperCase();
-        if(!options.containsKey(input)) {
-            input = null;
-        }
-        return input;
-    }
 
 
   /*  public void displayMenuModifier(Stage stage) {

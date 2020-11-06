@@ -1,5 +1,7 @@
 package be.technifutur.java2020.Labo1;
 
+import be.technifutur.java2020.Labo1.stage.StageList;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
@@ -7,20 +9,14 @@ import java.util.regex.PatternSyntaxException;
 public abstract class Controler implements Runnable {
 
     protected List list;
-    protected Vue vue;
+    protected Menu menu;
     protected Pattern datePattern = Pattern.compile("[0-9][0-9][0-9][0-9]\\h[0-1][0-9]\\h[0-3][0-9]\\h[0-9][0-9]\\h[0-9][0-9]");
 
-    public void setModel(StageList stageList) {
-        this.list = stageList;
-    }
+    public abstract void setModel(List list);
 
-    public void setVue(Vue vue) {
-        this.vue = vue;
-    }
+    public abstract void setVue(Vue vue);
 
-   /* public void setMenu(Menu menu) {
-        this.menu = menu;
-    } */
+   public abstract void setMenu(Menu menu);
 
     protected boolean isDateFormatValid(String input) throws PatternSyntaxException {
         Matcher matcher = this.datePattern.matcher(input);

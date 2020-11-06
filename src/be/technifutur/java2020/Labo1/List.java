@@ -1,5 +1,7 @@
 package be.technifutur.java2020.Labo1;
 
+import be.technifutur.java2020.Labo1.stage.Stage;
+
 import java.time.LocalDateTime;
 import java.util.TreeMap;
 
@@ -32,8 +34,6 @@ public abstract class List {
         list.get(key).setName(name);
     }
 
-    public abstract void setDateFin (String key, int year, int month, int day, int hour, int min);
-
     public void setDateDebut (String key, int year, int month, int day, int hour, int min) {
         list.get(key).setDateDebut(year, month, day, hour, min);
     }
@@ -41,6 +41,8 @@ public abstract class List {
     public LocalDateTime getDateDebut(String key) {
         return list.get(key).getDateDebut();
     }
+
+    public abstract void setDateFin(String key, int year, int month, int day, int hour, int min);
 
 
 }

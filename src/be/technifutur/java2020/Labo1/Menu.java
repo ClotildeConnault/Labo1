@@ -14,4 +14,12 @@ public class Menu {
             System.out.print(entry.getKey() + " - " + entry.getValue() + "\n");
         }
     }
+
+    public String getChoice() {
+        input = scan.nextLine().toUpperCase();
+        if(!options.containsKey(input)) {
+            input = null;
+        }
+        return input;
+    }
 }

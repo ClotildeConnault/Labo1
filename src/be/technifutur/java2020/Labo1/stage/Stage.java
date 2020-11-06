@@ -1,6 +1,8 @@
-package be.technifutur.java2020.Labo1;
+package be.technifutur.java2020.Labo1.stage;
 
-import java.io.Serializable;
+import be.technifutur.java2020.Labo1.Event;
+import be.technifutur.java2020.Labo1.activity.Activity;
+
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.util.HashMap;

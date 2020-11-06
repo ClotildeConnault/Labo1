@@ -1,10 +1,13 @@
-package be.technifutur.java2020.Labo1;
+package be.technifutur.java2020.Labo1.stage;
+
+import be.technifutur.java2020.Labo1.EventType;
+import be.technifutur.java2020.Labo1.List;
+import be.technifutur.java2020.Labo1.stage.Stage;
 
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
-import java.util.*;
 
-public class StageList extends List{
+public class StageList extends List {
 
 
     public StageList() {
@@ -25,6 +28,7 @@ public class StageList extends List{
 
         list.get(key).setDateFin(year, month, day, hour, min);
     }
+
 
     public LocalDateTime getDateFin(String key) {
         return list.get(key).getDateFin();

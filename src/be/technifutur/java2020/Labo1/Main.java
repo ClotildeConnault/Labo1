@@ -1,23 +1,24 @@
 package be.technifutur.java2020.Labo1;
 
-import java.util.TreeMap;
-
 public class Main {
     public static void main(String[] args) {
         Vue vue = new Vue();
-        StageList stageList = new StageList();
-        Controler controler = new Controler();
+        StageList list = new StageList();
+        MainControler controler = new MainControler();
 
         controler.setVue(vue);
-        controler.setModel(stageList);
-        vue.setModel(stageList);
+        controler.setModel(list);
+        vue.setModel(list);
 
-    controler.creationStage();
+    controler.run();
 
-        vue.afficheStages();
+
 
     }
-
+//TODO créer un contrôleur par type d'action pour Activity (créer, supprimer, etc)//TODO créer le menu pour Activity
+//TODO relier les contrôleurs d'Activity au menu
+//TODO revoir "optional" -> peut renvoyer quelque chose ou non
+// TODO créer la fabrique
 
 }
 

@@ -11,7 +11,7 @@ public class Vue {
         this.stageList = stageList;
     }
 
-    public void afficheStages(){
+    public void afficheStages() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
 
         System.out.println("Liste des stages");
@@ -57,5 +57,13 @@ public class Vue {
 
     public void succes() {
         System.out.print("Création réussie ");
+    }
+
+    public void erreurInputMenu() {
+        System.out.println("Cette valeur ne correspond à aucune option");
+    }
+
+    public void messageSortie() {
+        System.out.println("A bientôt");
     }
 }

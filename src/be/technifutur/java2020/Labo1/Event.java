@@ -9,6 +9,8 @@ import java.util.ArrayList;
 public abstract class Event {
     protected String name;
     protected LocalDateTime dateDebut;
+    protected LocalDateTime dateFin;
+    protected int duree;
 
 
     public Event(String name){
@@ -26,6 +28,10 @@ public abstract class Event {
         return dateDebut;
     }
 
+    public LocalDateTime getDateFin(){
+        return dateFin;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -33,4 +39,9 @@ public abstract class Event {
     public String getName(){
         return name;
     }
+
+    public int getDuree() {
+        return duree;
+    }
+
 }

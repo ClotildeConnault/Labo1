@@ -13,26 +13,21 @@ import java.util.Scanner;
 public class StageCreationControler extends Controler {
 
     private StageVue vue;
-
-    public StageCreationControler() {
-        list = new StageList();
-    }
-
-    @Override
-    public void setMenu(Menu menu) {
-        this.menu = menu;
-    }
-
-    @Override
-    public void setModel(List list) {
-        this.list = (StageList) list;
-    }
+    private StageList list;
 
     @Override
     public void setVue(Vue vue) {
         this.vue = (StageVue) vue;
     }
 
+    @Override
+    public void run(String key) {
+
+    }
+
+    public void setModel(StageList list) {
+        this.list = list;
+    }
 
     public void run(){
 

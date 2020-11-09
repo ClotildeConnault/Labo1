@@ -1,13 +1,15 @@
 package be.technifutur.java2020.Labo1;
 
+import be.technifutur.java2020.Labo1.activity.Activity;
 import be.technifutur.java2020.Labo1.stage.Stage;
+import be.technifutur.java2020.Labo1.stage.StageList;
 
 import java.time.LocalDateTime;
 import java.util.TreeMap;
 
-public abstract class List {
+public interface List {
 
-    protected TreeMap<String, Stage> list;
+    /*protected TreeMap<String, Stage> list;
 
     public List(EventType type) {
         switch (type) {
@@ -18,31 +20,21 @@ public abstract class List {
                 list = new TreeMap<String, Stage>();
                 break;
         }
-    }
+    }*/
+
 
     public abstract void add(String name);
 
-    public TreeMap<String, ? extends Event> getList(){
-        return list;
-    }
+    public abstract void remove();
 
-    public void removeStage() {
+    public abstract void setName (String key, String name);
 
-    }
+    public abstract void setDateDebut (String key, int year, int month, int day, int hour, int min);
 
-    public void setName (String key, String name) {
-        list.get(key).setName(name);
-    }
+    public abstract LocalDateTime getDateDebut(String key);
 
-    public void setDateDebut (String key, int year, int month, int day, int hour, int min) {
-        list.get(key).setDateDebut(year, month, day, hour, min);
-    }
 
-    public LocalDateTime getDateDebut(String key) {
-        return list.get(key).getDateDebut();
-    }
 
-    public abstract void setDateFin(String key, int year, int month, int day, int hour, int min);
 
 
 }

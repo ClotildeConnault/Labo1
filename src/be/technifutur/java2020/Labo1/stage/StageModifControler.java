@@ -1,20 +1,17 @@
 package be.technifutur.java2020.Labo1.stage;
 
-import be.technifutur.java2020.Labo1.Controler;
-import be.technifutur.java2020.Labo1.List;
-import be.technifutur.java2020.Labo1.Menu;
-import be.technifutur.java2020.Labo1.Vue;
+import be.technifutur.java2020.Labo1.*;
 
 public class StageModifControler extends Controler {
 
     private StageVue vue;
+    private Menu menu;
+    private List list;
 
-    @Override
     public void setModel(List list) {
         this.list = (StageList) list;
     }
 
-    @Override
     public void setMenu(Menu menu) {
         this.menu = menu;
     }
@@ -22,6 +19,11 @@ public class StageModifControler extends Controler {
     @Override
     public void setVue(Vue vue) {
         this.vue = (StageVue) vue;
+    }
+
+    @Override
+    public void run(String key) {
+
     }
 
     public void run() {

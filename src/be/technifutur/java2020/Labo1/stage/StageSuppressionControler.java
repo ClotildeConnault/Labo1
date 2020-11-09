@@ -7,9 +7,11 @@ import be.technifutur.java2020.Labo1.Vue;
 
 public class StageSuppressionControler extends Controler {
 
-    @Override
-    public void setModel(List list) {
-        this.list = (StageList) list;
+    private StageList list;
+    private Menu menu;
+
+    public void setModel(StageList list) {
+        this.list = list;
     }
 
     @Override
@@ -17,6 +19,11 @@ public class StageSuppressionControler extends Controler {
     }
 
     @Override
+    public void run(String key) {
+
+    }
+
+
     public void setMenu(Menu menu) {
         this.menu = menu;
     }

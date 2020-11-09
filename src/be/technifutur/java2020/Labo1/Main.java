@@ -9,36 +9,17 @@ import be.technifutur.java2020.Labo1.stage.StageVue;
 
 public class Main {
     public static void main(String[] args) {
-       /* StageVue vue = new StageVue();
-        StageList list = new StageList();
-        MainControler mainControler = new MainControler();
-        MenuPrincipal menuPrincipal = new MenuPrincipal(); */
 
-       /* mainControler.setVue(vue);
-        mainControler.setModel(list);
-        vue.setModel(list);
-        mainControler.setMenu(menuPrincipal); */
 
-        ActivityVue activityVue = new ActivityVue();
-        ActivityList activityList = new ActivityList();
-        ActivityMenu activityMenu = new ActivityMenu();
-        ActivityControler activityControler = new ActivityControler();
-
-        activityControler.setVue(activityVue);
-        activityControler.setModel(activityList);
-        activityControler.setMenu(activityMenu);
-        activityVue.setModel(activityList);
-
-        activityControler.run();
-
+        Factory factory = new Factory();
+        factory.getMainControler().run();
 
 
     }
 
 //TODO relier les contrôleurs d'Activity au menu
 //TODO revoir "optional" -> peut renvoyer quelque chose ou non
-// TODO créer la fabrique
-// TODO MainControler doit détenir un tableau avec tous les sous Controleurs
+
 
 }
 

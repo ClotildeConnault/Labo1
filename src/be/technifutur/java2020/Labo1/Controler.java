@@ -1,22 +1,28 @@
 package be.technifutur.java2020.Labo1;
 
+import be.technifutur.java2020.Labo1.activity.Activity;
 import be.technifutur.java2020.Labo1.stage.StageList;
+import be.technifutur.java2020.Labo1.stage.StageVue;
 
+import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
 public abstract class Controler implements Runnable {
 
-    protected List list;
-    protected Menu menu;
+    //protected StageList list;
     protected Pattern datePattern = Pattern.compile("[0-9][0-9][0-9][0-9]\\h[0-1][0-9]\\h[0-3][0-9]\\h[0-9][0-9]\\h[0-9][0-9]");
+    protected Pattern dureePattern = Pattern.compile("[0-9]+");
+    protected Scanner scan = new Scanner(System.in);
 
-    public abstract void setModel(List list);
+    //public void setModel(StageList list) {
+    //    this.list = list;
+    //}
 
     public abstract void setVue(Vue vue);
 
-   public abstract void setMenu(Menu menu);
+    //public abstract void setMenu(Menu menu);
 
     protected boolean isDateFormatValid(String input) throws PatternSyntaxException {
         Matcher matcher = this.datePattern.matcher(input);
@@ -29,5 +35,19 @@ public abstract class Controler implements Runnable {
         return isValid;
     }
 
-    public abstract void run();
+    protected boolean isDureeFormatValid(String input) {
+        Matcher matcher = this.dureePattern.matcher(input);
+        boolean isValid = true;
+
+        if (!matcher.matches()) {
+            System.out.println("La durée saisie n'est pas valide");
+            isValid = false;
+        }
+        return isValid;
+    }
+
+    public abstract void run(String key);
+
+    //public abstract String run();
+
 }

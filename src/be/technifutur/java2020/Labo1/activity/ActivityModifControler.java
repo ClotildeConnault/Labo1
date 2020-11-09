@@ -8,13 +8,15 @@ import be.technifutur.java2020.Labo1.Vue;
 public class ActivityModifControler extends Controler {
 
     private ActivityVue vue;
+    private Menu menu;
+    private ActivityList list;
 
-    @Override
+
     public void setMenu(Menu menu) {
         this.menu = (ActivityMenu) menu;
     }
 
-    @Override
+
     public void setModel(List list) {
         this.list = (ActivityList) list;
     }
@@ -22,6 +24,11 @@ public class ActivityModifControler extends Controler {
     @Override
     public void setVue(Vue vue) {
         this.vue = (ActivityVue) vue;
+    }
+
+    @Override
+    public void run(String key) {
+
     }
 
     @Override

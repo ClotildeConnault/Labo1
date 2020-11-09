@@ -9,13 +9,11 @@ import java.util.Map;
 
 public class ActivityVue extends Vue {
 
-    @Override
-    public void setModel(List list) {
-        this.list = (ActivityList) list;
+    private ActivityList list;
+    public void setModel(ActivityList list) {
+        this.list = list;
     }
-    //public void SetModel(ActivityList list){
-    //    list = list;
-    //}
+
     public void displayActivities() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
 
@@ -25,7 +23,7 @@ public class ActivityVue extends Vue {
 
 
 
-        for (Map.Entry<String, ? extends Event> entry : list.getList().entrySet()) {
+        for (Map.Entry<String, Activity> entry : list.getList().entrySet()) {
             System.out.print(
                     entry.getKey() + " " +
                             list.getDateDebut(entry.getKey()).format(formatter) + " "
@@ -44,7 +42,8 @@ public class ActivityVue extends Vue {
     }
 
     public void consigneCreaActivity() {
-        System.out.println("Création d'une nouvelle activité\n");
+        System.out.println("Création d'une nouvelle activité\n"
+                );
     }
 
     public void consigneDateDebut() {
@@ -55,10 +54,17 @@ public class ActivityVue extends Vue {
         System.out.println("Entrez une durée pour l'activité (en minutes)");
     }
 
-    public void consigneNomStage() {
+    public void consigneNomActivity() {
         System.out.println("Entrez le nom de l'activité");
     }
 
+    public void doesNotExist() {
+        System.out.println("Cette activité n'existe pas");
+    }
+
+    public void doesNotExistStage() {
+        System.out.println("Ce stage n'existe pas");
+    }
 
 
 }

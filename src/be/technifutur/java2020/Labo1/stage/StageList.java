@@ -1,17 +1,23 @@
 package be.technifutur.java2020.Labo1.stage;
 
+import be.technifutur.java2020.Labo1.Event;
 import be.technifutur.java2020.Labo1.EventType;
 import be.technifutur.java2020.Labo1.List;
+import be.technifutur.java2020.Labo1.activity.Activity;
+import be.technifutur.java2020.Labo1.activity.ActivityList;
 import be.technifutur.java2020.Labo1.stage.Stage;
+import com.sun.source.tree.Tree;
 
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
+import java.util.TreeMap;
 
-public class StageList extends List {
+public class StageList implements List {
 
+    private TreeMap<String, Stage> list;
 
     public StageList() {
-        super(EventType.STAGE);
+        list = new TreeMap<>();
     }
 
 
@@ -19,8 +25,28 @@ public class StageList extends List {
         this.list.put(name, new Stage(name)); //TODO message si clé déjà existante
     }
 
-    public void removeStage() {
+    public TreeMap<String, Stage> getList() {
+        return list;
+    }
 
+    @Override
+    public void remove() {
+
+    }
+
+    @Override
+    public void setName(String key, String name) {
+        list.get(key).setName("name");
+    }
+
+    @Override
+    public void setDateDebut(String key, int year, int month, int day, int hour, int min) {
+        list.get(key).setDateDebut(year, month, day, hour, min);
+    }
+
+    @Override
+    public LocalDateTime getDateDebut(String key) {
+        return list.get(key).getDateDebut();
     }
 
 
@@ -32,6 +58,20 @@ public class StageList extends List {
 
     public LocalDateTime getDateFin(String key) {
         return list.get(key).getDateFin();
+    }
+
+    public void addActivity(String key, String name) {
+        System.out.println("StageList.addActivity");
+        System.out.println(list.getClass());
+        System.out.println(list.size());
+        System.out.println(list.firstKey());
+        System.out.println(key);
+        System.out.println(list.containsKey(key));
+        list.get(key).addActivity(name);
+    }
+
+    public ActivityList getActivities(String key) {
+        return list.get(key).getActivityList();
     }
 
 }

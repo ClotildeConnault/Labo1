@@ -9,17 +9,13 @@ import java.util.Map;
 
 public class StageVue extends Vue {
 
-    private StageList stageList;
+    private StageList list;
 
-    @Override
-    public void setModel(List list) {
-        this.list = (StageList) list;
+    public void setModel(StageList list) {
+        this.list = list;
     }
-    //public void setModel(StageList stageList){
-    //    this.stageList = stageList;
-    //}
 
-    public void afficheStages() {
+    public void displayStages() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
 
         System.out.println("Liste des stages");
@@ -27,11 +23,11 @@ public class StageVue extends Vue {
         System.out.println("nom du stage" + "   " + "début du stage" + "   " + "fin du stage");
 
 
-        for (Map.Entry<String, ? extends Event> entry : stageList.getList().entrySet()) {
+        for (Map.Entry<String, ? extends Event> entry : list.getList().entrySet()) {
             System.out.print(
                     entry.getKey() + " " +
-                            stageList.getDateDebut(entry.getKey()).format(formatter) + " " +
-                            stageList.getDateFin(entry.getKey()).format(formatter)
+                            list.getDateDebut(entry.getKey()).format(formatter) + " " +
+                            list.getDateFin(entry.getKey()).format(formatter)
             );
             System.out.println();
         }
@@ -41,10 +37,14 @@ public class StageVue extends Vue {
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
         System.out.println(
-                this.stageList.getList().get(key).getName() + " " +
-                        this.stageList.getDateDebut(key).format(formatter) + " " +
-                        this.stageList.getDateFin(key).format(formatter) + "\n"
+                this.list.getList().get(key).getName() + " " +
+                        this.list.getDateDebut(key).format(formatter) + " " +
+                        this.list.getDateFin(key).format(formatter) + "\n"
         );
+    }
+
+    public void consigneChoixStage() {
+        System.out.println("Entrez le nom du stage auquel vous voulez ajouter une activité");
     }
 
     public void consigneCreaStage() {
@@ -73,5 +73,14 @@ public class StageVue extends Vue {
 
     public void messageSortie() {
         System.out.println("A bientôt");
+    }
+
+    public void noStages() {
+        System.out.println("Il n'y a aucun stage existant");
+    }
+
+    @Override
+    public void doesNotExist() {
+        System.out.println("Ce stage n'existe pas");
     }
 }

@@ -7,9 +7,9 @@ import java.time.format.DateTimeFormatter;
 
 public abstract class Vue {
 
-    protected List list;
+    //protected List list;
 
-    public abstract void setModel(List list);
+    //public abstract void setModel(List list);
 
     public void succes() {
         System.out.print("Création réussie ");
@@ -23,4 +23,5 @@ public abstract class Vue {
         System.out.println("A bientôt");
     }
 
+    public abstract void doesNotExist();
 }

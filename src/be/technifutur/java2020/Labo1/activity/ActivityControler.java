@@ -1,37 +1,48 @@
 package be.technifutur.java2020.Labo1.activity;
 
-import be.technifutur.java2020.Labo1.Controler;
-import be.technifutur.java2020.Labo1.List;
-import be.technifutur.java2020.Labo1.Menu;
-import be.technifutur.java2020.Labo1.Vue;
+import be.technifutur.java2020.Labo1.*;
 import be.technifutur.java2020.Labo1.stage.StageCreationControler;
 import be.technifutur.java2020.Labo1.stage.StageList;
 import be.technifutur.java2020.Labo1.stage.StageModifControler;
 import be.technifutur.java2020.Labo1.stage.StageSuppressionControler;
 
+import java.util.TreeMap;
+
 public class ActivityControler extends Controler {
 
     private ActivityVue vue;
     private ActivityMenu menu;
-    private Controler c;
+    private TreeMap<String, Controler> controlerList;
+    private StageList list;
 
-    @Override
-    public void setModel(List list) {
-        this.list = (ActivityList) list;
+    public ActivityControler() {
+        controlerList = new TreeMap<>();
     }
+
 
     @Override
     public void setVue(Vue vue) {
         this.vue = (ActivityVue) vue;
     }
 
-    @Override
-    public void setMenu(Menu menu) {
-        this.menu = (ActivityMenu) menu;
+    public void setMenu(ActivityMenu menu) {
+        this.menu = menu;
+    }
+
+    public void setModel(StageList list) {
+        this.list = list;
+    }
+
+    public void addControler(String key, Controler controler) {
+        controlerList.put(key, controler);
     }
 
     @Override
-    public void run() {
+    public void run(){
+
+    }
+
+    public void run(String key) {
         String input = null;
         do {
             menu.displayMenuPrincipal();
@@ -47,18 +58,18 @@ public class ActivityControler extends Controler {
 
             switch (input) {
                 case "1":
-                    c = new ActivityCreationControler();
-                    c.setVue(vue);
-                    c.setModel(list);
-                    c.run();
+                    //test ---------------------------------------------------------------
+                    System.out.println("Test" + list.getList().containsKey(key));
+                    //Fin Test -----------------------------------
+                    System.out.println("PV");
+                    controlerList.get("1").run(key);
+                    System.out.println("PV out");
                     break;
                 case "2":
-                    c = new ActivityModifControler();
-                    c.run();
+                    controlerList.get("2").run();
                     break;
                 case "3":
-                    c = new ActivitySuppressionControler();
-                    c.run();
+                    controlerList.get("3").run();
                     break;
                 case "4":
                     vue.displayActivities();

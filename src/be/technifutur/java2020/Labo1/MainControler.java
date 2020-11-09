@@ -1,27 +1,44 @@
 package be.technifutur.java2020.Labo1;
 
+import be.technifutur.java2020.Labo1.activity.ActivityControler;
+import be.technifutur.java2020.Labo1.activity.ActivityCreationControler;
 import be.technifutur.java2020.Labo1.stage.*;
+
+import java.util.HashMap;
+import java.util.Scanner;
+import java.util.TreeMap;
 
 public class MainControler extends Controler {
 
-    private MenuPrincipal menu;
-    private Controler c;
+    private StageList list;
     private StageVue vue;
+    private MenuPrincipal menu;
+    private TreeMap<String, Controler> controlerList;
 
-
-    @Override
-    public void setMenu(Menu menu) {
-        this.menu = (MenuPrincipal)menu;
+    public MainControler() {
+        controlerList = new TreeMap<String, Controler>();
     }
 
-    @Override
-    public void setModel(List list) {
-        this.list = (StageList) list;
+    public void setModel(StageList list) {
+        this.list = list;
     }
+    public void setMenu(MenuPrincipal menu) {
+        this.menu = menu;
+    }
+
+    public void addControler(String key, Controler controler) {
+        controlerList.put(key, controler);
+    }
+
 
     @Override
     public void setVue(Vue vue) {
-        this.vue = (StageVue)vue;
+        this.vue = (StageVue) vue;
+    }
+
+    @Override
+    public void run(String key) {
+
     }
 
     @Override
@@ -41,23 +58,36 @@ public class MainControler extends Controler {
 
             switch (input) {
                 case "1":
-                    c = new StageCreationControler();
-                    c.setVue(vue);
-                    c.setModel((StageList) list);
-                    c.run();
+                    controlerList.get("1").run();
                     break;
                 case "2":
-                    c = new StageModifControler();
-                    c.run();
+                    controlerList.get("2").run();
                     break;
                 case "3":
-                    c = new StageSuppressionControler();
-                    c.run();
+                    controlerList.get("3").run();
                     break;
                 case "4":
-                    vue.afficheStages();
+                    vue.displayStages();
                     break;
                 case "5":
+                    vue.consigneChoixStage();
+                    if (list.getList() != null) {
+                        vue.displayStages();
+                        String nomStage = scan.nextLine();
+                        //test ---------------------------------------------------------------
+                        System.out.println("Test" + list.getList().containsKey(nomStage));
+                        //Fin Test -----------------------------------
+                        if (!list.getList().containsKey(nomStage)) {
+                            vue.doesNotExist();
+                        }
+                        else {
+                            ActivityControler c = (ActivityControler)controlerList.get("5");
+                            c.run(nomStage);
+                        }
+                    }
+                    else {
+                        vue.noStages();
+                    }
 
                     break;
             }

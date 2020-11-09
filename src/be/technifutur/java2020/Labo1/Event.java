@@ -22,6 +22,7 @@ public abstract class Event {
         if (dateDebut.isBefore(LocalDateTime.now())) {
             throw new DateTimeException("La date ne peut pas être antérieure à aujourd'hui");
         }
+
     }
 
     public LocalDateTime getDateDebut(){

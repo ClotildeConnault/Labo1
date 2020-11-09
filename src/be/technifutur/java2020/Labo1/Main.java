@@ -17,7 +17,6 @@ public class Main {
 
     }
 
-//TODO relier les contrôleurs d'Activity au menu
 //TODO revoir "optional" -> peut renvoyer quelque chose ou non
 
 

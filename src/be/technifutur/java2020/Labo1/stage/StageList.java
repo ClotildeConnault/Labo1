@@ -1,12 +1,9 @@
 package be.technifutur.java2020.Labo1.stage;
 
-import be.technifutur.java2020.Labo1.Event;
-import be.technifutur.java2020.Labo1.EventType;
-import be.technifutur.java2020.Labo1.List;
-import be.technifutur.java2020.Labo1.activity.Activity;
+import be.technifutur.java2020.Labo1.*;
 import be.technifutur.java2020.Labo1.activity.ActivityList;
-import be.technifutur.java2020.Labo1.stage.Stage;
-import com.sun.source.tree.Tree;
+import be.technifutur.java2020.Labo1.contributor.EditContributor;
+import be.technifutur.java2020.Labo1.contributor.ContributorList;
 
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
@@ -15,9 +12,14 @@ import java.util.TreeMap;
 public class StageList implements List {
 
     private TreeMap<String, Stage> list;
+    private ContributorList contributorList;
 
     public StageList() {
         list = new TreeMap<>();
+    }
+
+    public void setContributorList(ContributorList contributorList) {
+        this.contributorList = contributorList;
     }
 
 
@@ -74,4 +76,19 @@ public class StageList implements List {
         return list.get(key).getActivityList();
     }
 
+    public boolean addContributor(String stageName, String contributorName) {
+        return contributorList.addContributor(stageName, contributorName);
+
+    }
+
+    public void editContributor(String name, EditContributor edit, String input) {
+        contributorList.editContributor(name, edit, input);
+
+    }
+
+    public void removeContributor(String name) {
+        contributorList.removeContributor(name);
+    }
 }
+
+

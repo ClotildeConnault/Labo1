@@ -10,13 +10,13 @@ import java.util.TreeMap;
 
 public class MainControler extends Controler {
 
-    private StageList list;
-    private StageVue vue;
+    protected StageList list;
+    protected StageVue vue;
     private MenuPrincipal menu;
-    private TreeMap<String, Controler> controlerList;
+    private TreeMap<ControlerType, Controler> controlerList;
 
     public MainControler() {
-        controlerList = new TreeMap<String, Controler>();
+        controlerList = new TreeMap<>();
     }
 
     public void setModel(StageList list) {
@@ -25,8 +25,7 @@ public class MainControler extends Controler {
     public void setMenu(MenuPrincipal menu) {
         this.menu = menu;
     }
-
-    public void addControler(String key, Controler controler) {
+    public void addControler(ControlerType key, Controler controler) {
         controlerList.put(key, controler);
     }
 
@@ -58,43 +57,70 @@ public class MainControler extends Controler {
 
             switch (input) {
                 case "1":
-                    controlerList.get("1").run();
+                    controlerList.get(ControlerType.STAGECREATIONCONTROLER).run();
                     break;
                 case "2":
-                    controlerList.get("2").run();
+                    controlerList.get(ControlerType.STAGEMODIFCONTROLER).run();
                     break;
                 case "3":
-                    controlerList.get("3").run();
+                    controlerList.get(ControlerType.STAGESUPPRESSIONCONTROLER).run();
                     break;
                 case "4":
-                    vue.displayStages();
+                    if (!list.getList().isEmpty()) {
+                        vue.displayStages();
+                    }
+                    else {
+                        vue.noStages();
+                    }
                     break;
                 case "5":
-                    vue.consigneChoixStage();
-                    if (list.getList() != null) {
+                    if (!list.getList().isEmpty()) {
+                        vue.consigneChoixStage();
                         vue.displayStages();
                         String nomStage = scan.nextLine();
-                        //test ---------------------------------------------------------------
-                        System.out.println("Test" + list.getList().containsKey(nomStage));
-                        //Fin Test -----------------------------------
+
                         if (!list.getList().containsKey(nomStage)) {
                             vue.doesNotExist();
                         }
                         else {
-                            ActivityControler c = (ActivityControler)controlerList.get("5");
-                            c.run(nomStage);
+                            controlerList.get(ControlerType.ACTIVITYCONTROLER).run(nomStage);
                         }
                     }
                     else {
                         vue.noStages();
                     }
-
                     break;
+                case "6":
+                    if(list.getList().isEmpty()) {
+                        vue.noStages();
+                    }
+                    else {
+                        vue.displayStages();
+                        vue.consigneAffichePlanning();
+                        input = scan.nextLine();
+                        if (stageExists(input)) {
+                            vue.displayStageSchedule(input);
+                        }
+                    }
+                    break;
+                case "7":
+                    controlerList.get(ControlerType.CONTRIBUTORCONTROLER).run();
+                    break;
+
             }
 
         } while (!input.equalsIgnoreCase("q"));
 
         vue.messageSortie();
+    }
+
+   public boolean stageExists(String key) {
+        boolean exists = true;
+        if(!list.getList().containsKey(key)) {
+            vue.doesNotExist();
+            exists = false;
+        }
+        return exists;
     }
 
 }

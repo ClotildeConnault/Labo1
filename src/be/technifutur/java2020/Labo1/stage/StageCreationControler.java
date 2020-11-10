@@ -1,11 +1,7 @@
 package be.technifutur.java2020.Labo1.stage;
 
 import be.technifutur.java2020.Labo1.Controler;
-import be.technifutur.java2020.Labo1.List;
-import be.technifutur.java2020.Labo1.Menu;
 import be.technifutur.java2020.Labo1.Vue;
-import be.technifutur.java2020.Labo1.activity.ActivityMenu;
-import be.technifutur.java2020.Labo1.stage.StageList;
 
 import java.time.DateTimeException;
 import java.util.Scanner;
@@ -91,7 +87,7 @@ public class StageCreationControler extends Controler {
         } while (dateTimeException);
 
         vue.succes();
-        vue.afficheStage(key);
+        vue.displayStage(key);
 
     }
 

@@ -15,10 +15,15 @@ public abstract class Controler implements Runnable {
     protected Pattern datePattern = Pattern.compile("[0-9][0-9][0-9][0-9]\\h[0-1][0-9]\\h[0-3][0-9]\\h[0-9][0-9]\\h[0-9][0-9]");
     protected Pattern dureePattern = Pattern.compile("[0-9]+");
     protected Scanner scan = new Scanner(System.in);
+    protected User user;
 
     //public void setModel(StageList list) {
     //    this.list = list;
     //}
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public abstract void setVue(Vue vue);
 
@@ -48,6 +53,11 @@ public abstract class Controler implements Runnable {
 
     public abstract void run(String key);
 
+    public boolean isONValid(String input) {
+        return input.equalsIgnoreCase("o")||input.equalsIgnoreCase("n");
+    }
+
     //public abstract String run();
+
 
 }

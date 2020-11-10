@@ -12,7 +12,7 @@ public class ActivityMenu extends Menu {
         options.put("2", "Modifier une activité");
         options.put("3", "Supprimer une activité");
         options.put("4", "Afficher les activités");
-        options.put("Q", "Quitter");
+        options.put("Q", "Retour au menu principal");
     }
 
     public void displayMenuPrincipal() {
@@ -22,8 +22,4 @@ public class ActivityMenu extends Menu {
         displayMenu();
     }
 
-    public static void main(String[] args) {
-        ActivityMenu menu = new ActivityMenu();
-        menu.displayMenuPrincipal();
-    }
 }

@@ -9,7 +9,7 @@ public class Menu {
     protected Scanner scan = new Scanner(System.in);
     protected String input = null;
 
-    protected void displayMenu() {
+    public void displayMenu() {
         for (Map.Entry entry : options.entrySet()) {
             System.out.print(entry.getKey() + " - " + entry.getValue() + "\n");
         }

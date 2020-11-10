@@ -28,11 +28,9 @@ public class ActivityModifControler extends Controler {
 
     @Override
     public void run(String key) {
-
     }
 
     @Override
     public void run() {
-        System.out.println("ActivityModifControler.run");
     }
 }

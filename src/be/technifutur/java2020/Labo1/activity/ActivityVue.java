@@ -62,9 +62,4 @@ public class ActivityVue extends Vue {
         System.out.println("Cette activité n'existe pas");
     }
 
-    public void doesNotExistStage() {
-        System.out.println("Ce stage n'existe pas");
-    }
-
-
 }

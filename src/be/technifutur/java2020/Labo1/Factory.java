@@ -1,13 +1,17 @@
 package be.technifutur.java2020.Labo1;
 
 import be.technifutur.java2020.Labo1.activity.*;
+import be.technifutur.java2020.Labo1.contributor.*;
 import be.technifutur.java2020.Labo1.stage.*;
+
+import java.util.Arrays;
+import java.util.TreeMap;
 
 public class Factory {
 
     private MainControler mainControler;
     private StageCreationControler stageCreationControler;
-    private StageModifControler stageModifControler;
+    private StageEditControler stageEditControler;
     private StageSuppressionControler stageSuppressionControler;
     private StageVue stageVue;
     private StageList stageList;
@@ -18,6 +22,12 @@ public class Factory {
     private ActivitySuppressionControler activitySuppressionControler;
     private ActivityVue activityVue;
     private ActivityMenu activityMenu;
+    private StageEditMenu stageEditMenu;
+    private ContributorControler contributorControler;
+    private ContributorList contributorList;
+    private ContributorCreationControler contributorCreationControler;
+    private ContributorEditControler contributorEditControler;
+    private ContributorVue contributorVue;
 
 
 
@@ -27,10 +37,11 @@ public class Factory {
             mainControler.setVue(getStageVue());
             mainControler.setModel(getStageList());
             mainControler.setMenu(getMenuPrincipal());
-            mainControler.addControler("1", getStageCreationControler());
-            mainControler.addControler("2", getStageModifControler());
-            mainControler.addControler("3", getStageSuppressionControler());
-            mainControler.addControler("5", getActivityControler());
+            mainControler.addControler(ControlerType.STAGECREATIONCONTROLER, getStageCreationControler());
+            mainControler.addControler(ControlerType.STAGEMODIFCONTROLER, getStageModifControler());
+            mainControler.addControler(ControlerType.STAGESUPPRESSIONCONTROLER, getStageSuppressionControler());
+            mainControler.addControler(ControlerType.ACTIVITYCONTROLER, getActivityControler());
+            mainControler.addControler(ControlerType.CONTRIBUTORCONTROLER, getContributorControler());
         }
         return mainControler;
     }
@@ -46,8 +57,16 @@ public class Factory {
     public StageList getStageList() {
         if (stageList == null) {
             stageList = new StageList();
+            stageList.setContributorList(getContributorList());
         }
         return stageList;
+    }
+
+    public ContributorList getContributorList() {
+        if (contributorList == null) {
+            contributorList = new ContributorList();
+        }
+        return contributorList;
     }
 
     public MenuPrincipal getMenuPrincipal() {
@@ -66,11 +85,12 @@ public class Factory {
         return stageCreationControler;
     }
 
-    public StageModifControler getStageModifControler() {
-        if (stageModifControler == null) {
-            stageModifControler = new StageModifControler();
+    public StageEditControler getStageModifControler() {
+        if (stageEditControler == null) {
+            stageEditControler = new StageEditControler();
+            stageEditControler.setMenu(stageEditMenu);
         }
-        return stageModifControler;
+        return stageEditControler;
     }
 
     public StageSuppressionControler getStageSuppressionControler() {
@@ -86,7 +106,8 @@ public class Factory {
             activityControler.setMenu(getActivityMenu());
             activityControler.setVue(getActivityVue());
             activityControler.setModel(getStageList());
-            activityControler.addControler("1", getActivityCreationControler());
+            activityControler.addControler(ControlerType.ACTIVITYCREATIONCONTROLER, getActivityCreationControler());
+            activityControler.addControler(ControlerType.MAINCONTROLER, getMainControler());
 
         }
         return activityControler;
@@ -114,4 +135,93 @@ public class Factory {
         }
         return activityCreationControler;
     }
+
+    public ContributorControler getContributorControler() {
+        if (contributorControler == null) {
+            contributorControler = new ContributorControler();
+            contributorControler.setVue(new ContributorVue());
+            contributorControler.setModel(getContributorList());
+            contributorControler.setControler(getMainControler());
+            contributorControler.addControler(ControlerType.CONTRIBUTORCREATIONCONTROLER, getContributorCreationControler());
+            contributorControler.addControler(ControlerType.CONTRIBUTOREDITCONTROLER, getContributorEditControler());
+
+        }
+        return contributorControler;
+    }
+
+    private Controler getContributorEditControler() {
+        if (contributorEditControler == null) {
+            contributorEditControler = new ContributorEditControler();
+            contributorEditControler.setVue(contributorVue);
+            contributorEditControler.setModel(getContributorList());
+        }
+        return contributorEditControler;
+    }
+
+    private ContributorCreationControler getContributorCreationControler() {
+        if (contributorCreationControler == null) {
+            contributorCreationControler = new ContributorCreationControler();
+            contributorCreationControler.setVue(getContributorVue());
+            contributorCreationControler.setControler(getMainControler());
+            contributorCreationControler.setModel(getContributorList());
+            contributorCreationControler.addControler(ControlerType.CONTRIBUTOREDITCONTROLER, getContributorEditControler());
+        }
+        return contributorCreationControler;
+    }
+    
+
+    private ContributorVue getContributorVue() {
+        if (contributorVue == null) {
+            contributorVue = new ContributorVue();
+        }
+        return contributorVue;
+    }
+
+
+    public StageEditMenu getStageModifMenu() {
+        if (stageEditMenu == null) {
+            stageEditMenu = new StageEditMenu();
+        }
+        return stageEditMenu;
+    }
+
+    public TestUser getTestUser() {
+        String[] testInput = new String[]{
+                "1",
+                "Stage de jeu de rôle",//stage
+                "2020 12 12 09 00",
+                "2020 12 18 18 00",
+                "5",
+                "Stage de jeu de rôle",//stage
+                "Création de personnages",
+                "2020 12 12 09 00",
+                "120",
+                "6",
+                "Stage de jeu de rôle"
+        };
+        return new TestUser(Arrays.asList(testInput).iterator());
+    }
+
+    public static void main(String[] args) {
+       /* StageList list = new StageList();
+        list.add("bla");
+        list.setDateDebut("bla", 2020, 12, 12, 02, 02);
+        list.setDateFin("bla", 2020, 12, 15, 02, 02);
+        StageVue vue = new StageVue();
+        vue.setModel(list);
+        list.addActivity("bla", "Truc");
+        list.getActivities("bla").setDateDebut("Truc", 2020, 12, 14, 05, 00);
+        list.getActivities("bla").setDuree("Truc", 120);
+        list.addActivity("bla", "Bidule");
+        list.getActivities("bla").setDateDebut("Bidule", 2020, 12, 14, 01, 00);
+        list.getActivities("bla").setDuree("Bidule", 102);
+        list.addActivity("bla", "Machin");
+        list.getActivities("bla").setDateDebut("Machin", 2020, 12, 14, 03, 00);
+        list.getActivities("bla").setDuree("Machin", 35);
+        vue.displayStageSchedule("bla"); */
+
+
+    }
 }
+
+

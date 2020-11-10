@@ -1,22 +1,23 @@
 package be.technifutur.java2020.Labo1.stage;
 
+import be.technifutur.java2020.Labo1.contributor.ContributorList;
 import be.technifutur.java2020.Labo1.Event;
-import be.technifutur.java2020.Labo1.activity.Activity;
 import be.technifutur.java2020.Labo1.activity.ActivityList;
 
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
-import java.util.HashMap;
 
 
 public class Stage extends Event {
 
     private LocalDateTime dateFin;
     private ActivityList activityList;
+    private ContributorList contributorList;
 
     public Stage(String name){
         super(name);
         activityList = new ActivityList();
+        contributorList = new ContributorList();
     }
 
     public void setDateFin(int year, int month, int day, int hour, int min) throws DateTimeException {
@@ -45,6 +46,20 @@ public class Stage extends Event {
     public ActivityList getActivityList() {
         return activityList;
     }
+
+  /*  public boolean addContributor(String name, Contributor contributor) {
+
+    }
+
+    public boolean removeContributor(String name) {
+        return false;
+    }
+
+    public boolean editContributor(String name) {
+        return false;
+    }
+
+   */
 
 
 }

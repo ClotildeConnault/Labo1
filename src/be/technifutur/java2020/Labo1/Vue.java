@@ -1,9 +1,5 @@
 package be.technifutur.java2020.Labo1;
 
-import be.technifutur.java2020.Labo1.stage.StageList;
-
-import java.time.format.DateTimeFormatter;
-
 
 public abstract class Vue {
 

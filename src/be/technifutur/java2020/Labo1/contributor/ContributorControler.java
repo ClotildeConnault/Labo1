@@ -43,15 +43,6 @@ public class ContributorControler extends MainControler {
         controlerList.put(key, controler);
     }
 
-    public boolean existsContributor(String name) {
-        boolean exists = true;
-        if (!contributorList.getContributors().containsKey(name)) {
-            exists = false;
-            vue.doesNotExist();
-        }
-        return exists;
-    }
-
 
     @Override
     public void run() {

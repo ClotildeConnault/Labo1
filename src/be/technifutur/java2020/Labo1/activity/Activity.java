@@ -4,7 +4,9 @@ import be.technifutur.java2020.Labo1.Event;
 import be.technifutur.java2020.Labo1.contributor.Contributor;
 import be.technifutur.java2020.Labo1.contributor.ContributorList;
 
-public class Activity extends Event {
+import java.io.Serializable;
+
+public class Activity extends Event implements Serializable {
 
     private ContributorList registeredList;
     private String stageName;

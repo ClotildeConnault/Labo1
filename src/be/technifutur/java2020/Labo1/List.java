@@ -1,11 +1,6 @@
 package be.technifutur.java2020.Labo1;
 
-import be.technifutur.java2020.Labo1.activity.Activity;
-import be.technifutur.java2020.Labo1.stage.Stage;
-import be.technifutur.java2020.Labo1.stage.StageList;
-
 import java.time.LocalDateTime;
-import java.util.TreeMap;
 
 public interface List {
 

@@ -6,10 +6,11 @@ import be.technifutur.java2020.Labo1.List;
 import be.technifutur.java2020.Labo1.activity.Activity;
 import be.technifutur.java2020.Labo1.contributor.Contributor;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.TreeMap;
 
-public class ActivityList implements List {
+public class ActivityList implements List, Serializable {
 
 
     private TreeMap<String, Activity> list;

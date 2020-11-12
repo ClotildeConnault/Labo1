@@ -1,18 +1,16 @@
 package be.technifutur.java2020.Labo1.stage;
 
 import be.technifutur.java2020.Labo1.*;
-import be.technifutur.java2020.Labo1.activity.Activity;
 import be.technifutur.java2020.Labo1.activity.ActivityList;
 import be.technifutur.java2020.Labo1.contributor.Contributor;
-import be.technifutur.java2020.Labo1.contributor.EditContributor;
 import be.technifutur.java2020.Labo1.contributor.ContributorList;
-
+import java.io.Serializable;
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
-import java.util.HashMap;
+
 import java.util.TreeMap;
 
-public class StageList implements List {
+public class StageList implements List, Serializable {
 
     private TreeMap<String, Stage> list;
     private ContributorList contributorList;
@@ -73,7 +71,7 @@ public class StageList implements List {
         return list.get(stageName).getActivityList();
     }
 
-    public Activity getActivity(String stageName, String activityName) {
+    public be.technifutur.java2020.Labo1.activity.Activity getActivity(String stageName, String activityName) {
         return list.get(stageName).getActivity(activityName);
     }
 

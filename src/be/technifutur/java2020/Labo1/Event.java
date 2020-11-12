@@ -1,12 +1,13 @@
 package be.technifutur.java2020.Labo1;
 
+import java.io.Serializable;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
-public abstract class Event {
+public abstract class Event implements Serializable {
     protected String name;
     protected LocalDateTime dateDebut;
     protected LocalDateTime dateFin;

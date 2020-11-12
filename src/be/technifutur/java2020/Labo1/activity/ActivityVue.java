@@ -34,7 +34,7 @@ public class ActivityVue extends Vue {
 
 
 
-        for (Map.Entry<String, Activity> entry : activityList.getList().entrySet()) {
+        for (Map.Entry<String, be.technifutur.java2020.Labo1.activity.Activity> entry : activityList.getList().entrySet()) {
             System.out.print(
                     entry.getKey() + " " +
                             activityList.getDateDebut(entry.getKey()).format(formatter) + " "
@@ -75,6 +75,10 @@ public class ActivityVue extends Vue {
 
     public void doesNotExist() {
         System.out.println("Cette activité n'existe pas");
+    }
+
+    public void doesNotExistContributor() {
+        System.out.println("Cet intervenant n'existe pas");
     }
 
     public void consigneContributorName() {

@@ -1,14 +1,15 @@
 package be.technifutur.java2020.Labo1.contributor;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Contributor {
+public class Contributor implements Serializable {
     private String name;
     private String email;
     private String club;
-    private Set<String> stages;
+    private HashSet<String> stages;
 
     public Contributor(String name){
         this.name = name;

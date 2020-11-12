@@ -4,6 +4,8 @@ import be.technifutur.java2020.Labo1.activity.ActivityControler;
 import be.technifutur.java2020.Labo1.contributor.ContributorControler;
 import be.technifutur.java2020.Labo1.stage.*;
 
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
 import java.util.TreeMap;
 
 public class MainControler extends Controler {
@@ -123,6 +125,9 @@ public class MainControler extends Controler {
         } while (!input.equalsIgnoreCase("q"));
 
         vue.messageSortie();
+
+        writeObjectToFile(list);
+        //TODO ajouter ici l'enregistrement des données
     }
 
    public boolean stageExists(String key) {
@@ -133,5 +138,23 @@ public class MainControler extends Controler {
         }
         return exists;
     }
+
+
+    public void writeObjectToFile(Object serObj) {
+
+        try {
+
+            FileOutputStream fileOut = new FileOutputStream(Factory.filepath);
+            ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
+            objectOut.writeObject(serObj);
+            objectOut.close();
+            System.out.println("The Object  was succesfully written to a file");
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+
 
 }

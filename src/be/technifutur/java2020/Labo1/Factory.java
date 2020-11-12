@@ -3,11 +3,13 @@ package be.technifutur.java2020.Labo1;
 import be.technifutur.java2020.Labo1.activity.*;
 import be.technifutur.java2020.Labo1.contributor.*;
 import be.technifutur.java2020.Labo1.stage.*;
+import be.technifutur.java2020.Labo1.stage.StageList;
 
+import java.io.*;
 import java.util.Arrays;
-import java.util.TreeMap;
 
 public class Factory {
+    public static final String filepath="C:\\Users\\cloti\\OneDrive\\Documents\\Java base\\java2020Labo1\\src\\be\\technifutur\\java2020\\backup.save";
 
     private MainControler mainControler;
     private StageCreationControler stageCreationControler;
@@ -56,9 +58,31 @@ public class Factory {
     }
 
     public StageList getStageList() {
+        //TODO ajouter ici le chargement du fichier
         if (stageList == null) {
-            stageList = new StageList();
-            stageList.setContributorList(getContributorList());
+            try
+            {
+                // Reading the object from a file
+                FileInputStream file = new FileInputStream(filepath);
+                ObjectInputStream in = new ObjectInputStream(file);
+
+                // Method for deserialization of object
+                stageList = (StageList)in.readObject();
+
+                in.close();
+                file.close();
+
+                System.out.println("Object has been deserialized ");
+            } catch(IOException ex)
+            {
+                System.out.println("IOException is caught");
+                ex.printStackTrace();
+            } catch(ClassNotFoundException ex)
+            {
+                System.out.println("ClassNotFoundException is caught");
+            }
+           // stageList = new StageList();
+            //stageList.setContributorList(getContributorList());
         }
         return stageList;
     }
@@ -115,7 +139,7 @@ public class Factory {
             activityRegisterControler.setMenu(new ActivityRegisterMenu());
             activityRegisterControler.setModel(getStageList());
             activityRegisterControler.setVue(getActivityVue());
-            activityRegisterControler.addControler(ControlerType.CONTRIBUTORCONTROLER, getContributorControler());
+            activityRegisterControler.setContributorList(getContributorList());
         }
         return activityRegisterControler;
     }
@@ -219,7 +243,71 @@ public class Factory {
         return new TestUser(Arrays.asList(testInput).iterator());
     }
 
+    private void openFile() {
+        Stage test = null;
+        try
+        {
+            // Reading the object from a file
+            FileInputStream file = new FileInputStream(filepath);
+            ObjectInputStream in = new ObjectInputStream(file);
+
+            // Method for deserialization of object
+            test = (Stage)in.readObject();
+
+            in.close();
+            file.close();
+
+            System.out.println("Object has been deserialized ");
+        }
+
+        catch(IOException ex)
+        {
+            System.out.println("IOException is caught");
+            ex.printStackTrace();
+        }
+
+        catch(ClassNotFoundException ex)
+        {
+            System.out.println("ClassNotFoundException is caught");
+        }
+
+    }
+
+
     public static void main(String[] args) {
+        StageList testAfter = null;
+        Factory factory = new Factory();
+        factory.getMainControler();
+
+        try
+        {
+            // Reading the object from a file
+            FileInputStream file = new FileInputStream(filepath);
+            ObjectInputStream in = new ObjectInputStream(file);
+
+            // Method for deserialization of object
+            testAfter = (StageList)in.readObject();
+
+            in.close();
+            file.close();
+
+            System.out.println("Object has been deserialized ");
+        }
+
+        catch(IOException ex)
+        {
+            System.out.println("IOException is caught");
+            ex.printStackTrace();
+        }
+
+        catch(ClassNotFoundException ex)
+        {
+            System.out.println("ClassNotFoundException is caught");
+        }
+
+
+        System.out.println(testAfter.getList().size());
+
        /* StageList list = new StageList();
         list.add("bla");
         list.setDateDebut("bla", 2020, 12, 12, 02, 02);

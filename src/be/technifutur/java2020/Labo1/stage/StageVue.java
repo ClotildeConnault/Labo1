@@ -1,9 +1,7 @@
 package be.technifutur.java2020.Labo1.stage;
 
 import be.technifutur.java2020.Labo1.Event;
-import be.technifutur.java2020.Labo1.List;
 import be.technifutur.java2020.Labo1.Vue;
-import be.technifutur.java2020.Labo1.activity.Activity;
 import be.technifutur.java2020.Labo1.contributor.Contributor;
 
 import java.time.Duration;
@@ -60,8 +58,8 @@ public class StageVue extends Vue {
         long diff = Math.abs(duration.toDays());
         System.out.println(diff);
 
-        TreeMap<LocalDateTime, Activity> sortedActivities = new TreeMap<>();
-        for (Activity activity : list.getActivities(key).getList().values()) {
+        TreeMap<LocalDateTime, be.technifutur.java2020.Labo1.activity.Activity> sortedActivities = new TreeMap<>();
+        for (be.technifutur.java2020.Labo1.activity.Activity activity : list.getActivities(key).getList().values()) {
             sortedActivities.put(activity.getDateDebut(), activity);
         }
 
@@ -69,7 +67,7 @@ public class StageVue extends Vue {
             dateInFrench = date.format(DateTimeFormatter.ofPattern("EEEE dd MMMM yyyy", Locale.FRENCH));
             System.out.println(dateInFrench);
 
-            for (Activity activity : sortedActivities.values()) {
+            for (be.technifutur.java2020.Labo1.activity.Activity activity : sortedActivities.values()) {
                 if (activity.getDateDebut().getDayOfYear() == (date.getDayOfYear())) {
                     LocalTime start = LocalTime.of(activity.getDateDebut().getHour(), activity.getDateDebut().getMinute());
                     LocalTime end = start.plusMinutes(activity.getDuree());

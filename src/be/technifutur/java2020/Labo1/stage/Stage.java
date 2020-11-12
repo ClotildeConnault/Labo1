@@ -6,11 +6,12 @@ import be.technifutur.java2020.Labo1.contributor.ContributorList;
 import be.technifutur.java2020.Labo1.Event;
 import be.technifutur.java2020.Labo1.activity.ActivityList;
 
+import java.io.Serializable;
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
 
 
-public class Stage extends Event {
+public class Stage extends Event implements Serializable {
 
     private LocalDateTime dateFin;
     private ActivityList activityList;
@@ -35,7 +36,6 @@ public class Stage extends Event {
     public LocalDateTime getDateFin(){
         return dateFin;
     }
-
 
     public int getDuree() {
         return duree;

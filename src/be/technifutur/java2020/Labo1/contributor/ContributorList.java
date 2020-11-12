@@ -2,9 +2,10 @@ package be.technifutur.java2020.Labo1.contributor;
 
 import be.technifutur.java2020.Labo1.Controler;
 
+import java.io.Serializable;
 import java.util.TreeMap;
 
-public class ContributorList {
+public class ContributorList implements Serializable {
 
     private TreeMap<String, Contributor> contributors;
 

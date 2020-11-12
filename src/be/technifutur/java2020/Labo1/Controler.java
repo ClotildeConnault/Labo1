@@ -1,9 +1,5 @@
 package be.technifutur.java2020.Labo1;
 
-import be.technifutur.java2020.Labo1.activity.Activity;
-import be.technifutur.java2020.Labo1.stage.StageList;
-import be.technifutur.java2020.Labo1.stage.StageVue;
-
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

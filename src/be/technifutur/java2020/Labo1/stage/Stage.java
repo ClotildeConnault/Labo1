@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 
 public class Stage extends Event implements Serializable {
 
+    private static final long serialVersionUID = -3742135449695740510L;
     private LocalDateTime dateFin;
     private ActivityList activityList;
     private ContributorList contributorList;

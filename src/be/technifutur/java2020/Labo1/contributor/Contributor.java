@@ -6,6 +6,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Contributor implements Serializable {
+
+    private static final long serialVersionUID = 3319406022657543826L;
     private String name;
     private String email;
     private String club;

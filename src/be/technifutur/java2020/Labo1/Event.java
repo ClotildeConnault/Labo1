@@ -8,6 +8,8 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 
 public abstract class Event implements Serializable {
+
+    private static final long serialVersionUID = 2355420443250979760L;
     protected String name;
     protected LocalDateTime dateDebut;
     protected LocalDateTime dateFin;

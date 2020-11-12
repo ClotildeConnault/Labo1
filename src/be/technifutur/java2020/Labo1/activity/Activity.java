@@ -8,6 +8,7 @@ import java.io.Serializable;
 
 public class Activity extends Event implements Serializable {
 
+    private static final long serialVersionUID = 7737104511115586209L;
     private ContributorList registeredList;
     private String stageName;
     private int duree;

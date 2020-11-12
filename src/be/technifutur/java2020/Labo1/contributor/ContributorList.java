@@ -7,6 +7,7 @@ import java.util.TreeMap;
 
 public class ContributorList implements Serializable {
 
+    private static final long serialVersionUID = 6936326766871353323L;
     private TreeMap<String, Contributor> contributors;
 
     public ContributorList() {

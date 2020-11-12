@@ -12,6 +12,7 @@ import java.util.TreeMap;
 
 public class StageList implements List, Serializable {
 
+    private static final long serialVersionUID = -6283284290592046900L;
     private TreeMap<String, Stage> list;
     private ContributorList contributorList;
 

@@ -141,9 +141,10 @@ public class Factory {
             contributorControler = new ContributorControler();
             contributorControler.setVue(new ContributorVue());
             contributorControler.setModel(getContributorList());
-            contributorControler.setControler(getMainControler());
+            contributorControler.setModel(getStageList());
             contributorControler.addControler(ControlerType.CONTRIBUTORCREATIONCONTROLER, getContributorCreationControler());
             contributorControler.addControler(ControlerType.CONTRIBUTOREDITCONTROLER, getContributorEditControler());
+            contributorControler.addControler(ControlerType.MAINCONTROLER, getMainControler());
 
         }
         return contributorControler;
@@ -162,13 +163,12 @@ public class Factory {
         if (contributorCreationControler == null) {
             contributorCreationControler = new ContributorCreationControler();
             contributorCreationControler.setVue(getContributorVue());
-            contributorCreationControler.setControler(getMainControler());
             contributorCreationControler.setModel(getContributorList());
             contributorCreationControler.addControler(ControlerType.CONTRIBUTOREDITCONTROLER, getContributorEditControler());
         }
         return contributorCreationControler;
     }
-    
+
 
     private ContributorVue getContributorVue() {
         if (contributorVue == null) {

@@ -23,7 +23,7 @@ public class StageEditControler extends MainControler {
     public void run() {
         String input = null;
 
-        vue.consigneChoixStage();
+        vue.consigneActivityStage();
         vue.displayStages();
         input = scan.nextLine();
         if (stageExists(input)) {
@@ -42,9 +42,6 @@ public class StageEditControler extends MainControler {
                         break;
                 }
 
-
-
-
             }
             else {
                 vue.erreurInputMenu();
@@ -55,7 +52,4 @@ public class StageEditControler extends MainControler {
         }
     }
 
-    public void run(String key) {
-
-    }
 }

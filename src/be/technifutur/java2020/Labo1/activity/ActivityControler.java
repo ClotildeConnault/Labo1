@@ -7,15 +7,19 @@ import java.util.TreeMap;
 
 public class ActivityControler extends Controler {
 
-    private ActivityVue vue;
+    protected ActivityVue vue;
     private ActivityMenu menu;
     private TreeMap<ControlerType, Controler> controlerList;
-    private StageList list;
+    protected StageList list;
+    protected String activeStage;
 
     public ActivityControler() {
         controlerList = new TreeMap<>();
     }
 
+    public void setActiveStage(String activeStage) {
+        this.activeStage = activeStage;
+    }
 
     @Override
     public void setVue(Vue vue) {
@@ -34,12 +38,7 @@ public class ActivityControler extends Controler {
         controlerList.put(key, controler);
     }
 
-    @Override
-    public void run(){
-
-    }
-
-    public void run(String key) {
+    public void run() {
         String input = null;
         do {
             menu.displayMenuPrincipal();
@@ -55,7 +54,7 @@ public class ActivityControler extends Controler {
 
             switch (input) {
                 case "1":
-                    controlerList.get(ControlerType.ACTIVITYCREATIONCONTROLER).run(key);
+                    controlerList.get(ControlerType.ACTIVITYCREATIONCONTROLER).run();
                     break;
                 case "2":
                     controlerList.get(ControlerType.ACTIVITYMODIFCONTROLER).run();

@@ -85,7 +85,7 @@ public class StageVue extends Vue {
         }
     }
 
-    public void consigneChoixStage() {
+    public void consigneActivityStage() {
         System.out.println("Entrez le nom du stage auquel vous voulez ajouter une activité");
     }
 
@@ -95,6 +95,10 @@ public class StageVue extends Vue {
 
     public void consigneAffichePlanning() {
         System.out.println("Entrez le nom du stage dont vous voulez afficher le planning");
+    }
+
+    public void consigneContributorStage() {
+        System.out.println("Entrez le nom du stage pour lequel vous voulez gérer les contributeurs");
     }
 
     public void consigneCreaStage() {

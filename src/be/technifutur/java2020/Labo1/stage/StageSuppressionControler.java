@@ -18,12 +18,6 @@ public class StageSuppressionControler extends Controler {
     public void setVue(Vue vue) {
     }
 
-    @Override
-    public void run(String key) {
-
-    }
-
-
     public void setMenu(Menu menu) {
         this.menu = menu;
     }

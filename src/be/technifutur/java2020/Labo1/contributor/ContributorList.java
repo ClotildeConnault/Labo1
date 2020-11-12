@@ -1,5 +1,7 @@
 package be.technifutur.java2020.Labo1.contributor;
 
+import be.technifutur.java2020.Labo1.Controler;
+
 import java.util.TreeMap;
 
 public class ContributorList {
@@ -22,9 +24,21 @@ public class ContributorList {
         return added;
     }
 
+    public boolean addContributor(String name, Contributor contributor) {
+         boolean added = false;
+         if (contributors.containsKey(name)) {
+             contributors.put(name, contributor);
+             added = true;
+         }
+         return added;
+    }
+
     public boolean removeContributor(String name) {
         return removeContributor(name);
+    }
 
+    public Contributor getContributor(String name) {
+        return contributors.get(name);
     }
 
     public void editContributor(String name, EditContributor edit, String input) {

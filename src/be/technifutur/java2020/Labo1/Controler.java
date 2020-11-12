@@ -51,13 +51,13 @@ public abstract class Controler implements Runnable {
         return isValid;
     }
 
-    public abstract void run(String key);
+    public abstract void run();
 
     public boolean isONValid(String input) {
         return input.equalsIgnoreCase("o")||input.equalsIgnoreCase("n");
     }
 
-    //public abstract String run();
+
 
 
 }

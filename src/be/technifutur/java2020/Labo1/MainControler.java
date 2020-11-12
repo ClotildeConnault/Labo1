@@ -1,11 +1,9 @@
 package be.technifutur.java2020.Labo1;
 
 import be.technifutur.java2020.Labo1.activity.ActivityControler;
-import be.technifutur.java2020.Labo1.activity.ActivityCreationControler;
+import be.technifutur.java2020.Labo1.contributor.ContributorControler;
 import be.technifutur.java2020.Labo1.stage.*;
 
-import java.util.HashMap;
-import java.util.Scanner;
 import java.util.TreeMap;
 
 public class MainControler extends Controler {
@@ -33,11 +31,6 @@ public class MainControler extends Controler {
     @Override
     public void setVue(Vue vue) {
         this.vue = (StageVue) vue;
-    }
-
-    @Override
-    public void run(String key) {
-
     }
 
     @Override
@@ -75,15 +68,16 @@ public class MainControler extends Controler {
                     break;
                 case "5":
                     if (!list.getList().isEmpty()) {
-                        vue.consigneChoixStage();
+                        vue.consigneActivityStage();
                         vue.displayStages();
-                        String nomStage = scan.nextLine();
+                        String stageName = scan.nextLine();
 
-                        if (!list.getList().containsKey(nomStage)) {
+                        if (!list.getList().containsKey(stageName)) {
                             vue.doesNotExist();
                         }
                         else {
-                            controlerList.get(ControlerType.ACTIVITYCONTROLER).run(nomStage);
+                            ((ActivityControler)controlerList.get(ControlerType.ACTIVITYCONTROLER)).setActiveStage(stageName);
+                            controlerList.get(ControlerType.ACTIVITYCONTROLER).run();
                         }
                     }
                     else {
@@ -91,7 +85,7 @@ public class MainControler extends Controler {
                     }
                     break;
                 case "6":
-                    if(list.getList().isEmpty()) {
+                    if (list.getList().isEmpty()) {
                         vue.noStages();
                     }
                     else {
@@ -104,9 +98,22 @@ public class MainControler extends Controler {
                     }
                     break;
                 case "7":
-                    controlerList.get(ControlerType.CONTRIBUTORCONTROLER).run();
+                    if (list.getList().isEmpty()) {
+                        vue.noStages();
+                    }
+                    else {
+                        vue.displayStages();
+                        vue.consigneContributorStage();
+                        input = scan.nextLine();
+                        if (stageExists(input)) {
+                            ((ContributorControler)controlerList.get(ControlerType.CONTRIBUTORCONTROLER)).setActiveStage(input);
+                            controlerList.get(ControlerType.CONTRIBUTORCONTROLER).run();
+                        }
+                        else {
+                            run();
+                        }
+                    }
                     break;
-
             }
 
         } while (!input.equalsIgnoreCase("q"));

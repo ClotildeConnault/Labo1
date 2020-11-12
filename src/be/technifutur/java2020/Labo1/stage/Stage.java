@@ -1,5 +1,6 @@
 package be.technifutur.java2020.Labo1.stage;
 
+import be.technifutur.java2020.Labo1.contributor.Contributor;
 import be.technifutur.java2020.Labo1.contributor.ContributorList;
 import be.technifutur.java2020.Labo1.Event;
 import be.technifutur.java2020.Labo1.activity.ActivityList;
@@ -47,10 +48,14 @@ public class Stage extends Event {
         return activityList;
     }
 
-  /*  public boolean addContributor(String name, Contributor contributor) {
-
+    public ContributorList getContributorList() {
+        return contributorList;
     }
 
+    public boolean addContributor(String name, Contributor contributor) {
+        return contributorList.addContributor(name, contributor);
+    }
+/*
     public boolean removeContributor(String name) {
         return false;
     }

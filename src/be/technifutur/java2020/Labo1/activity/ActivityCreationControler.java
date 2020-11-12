@@ -10,23 +10,14 @@ import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.util.Scanner;
 
-public class ActivityCreationControler extends Controler {
+public class ActivityCreationControler extends ActivityControler {
 
-    private ActivityVue vue;
-    //private Menu menu;
-    private StageList list;
-    private String stageKey;
     private String activityKey;
     private LocalDateTime dateTest;
 
     public void setModel(StageList list) {
         this.list = list;
     }
-
-
-   // public void setMenu(Menu menu) {
-   //     this.menu = (ActivityMenu) menu;
-   // }
 
     @Override
     public void setVue(Vue vue) {
@@ -38,16 +29,13 @@ public class ActivityCreationControler extends Controler {
     }
 
     public void run(String key) {
-        stageKey = key;
+
         vue.consigneCreaActivity();
 
             vue.consigneNomActivity();
             activityKey = scan.nextLine();
             ActivityList activityList = list.getActivities(key);
- //test ---------------------------------------------------------------
-        System.out.println("Test" + list.getList().containsKey(key));
-        //Fin Test -----------------------------------
-            list.addActivity(stageKey, activityKey);
+            list.addActivity(activeStage, activityKey);
             boolean dateTimeException = false;
             String input = null;
 
@@ -68,7 +56,7 @@ public class ActivityCreationControler extends Controler {
                                 Integer.valueOf(input.substring(14))
                         );
 
-                    } while (!isDateValid(stageKey, dateTest));
+                    } while (!isDateValid(activeStage, dateTest));
 
 
                     activityList.setDateDebut(
@@ -93,7 +81,7 @@ public class ActivityCreationControler extends Controler {
                 vue.consigneDuree();
                 input = scan.nextLine();
 
-            } while (!isDureeFormatValid(input) || !isDureeValid(stageKey, input));
+            } while (!isDureeFormatValid(input) || !isDureeValid(activeStage, input));
 
             activityList.setDuree(activityKey, Integer.parseInt(input));
             vue.succes();

@@ -2,6 +2,7 @@ package be.technifutur.java2020.Labo1.stage;
 
 import be.technifutur.java2020.Labo1.*;
 import be.technifutur.java2020.Labo1.activity.ActivityList;
+import be.technifutur.java2020.Labo1.contributor.Contributor;
 import be.technifutur.java2020.Labo1.contributor.EditContributor;
 import be.technifutur.java2020.Labo1.contributor.ContributorList;
 
@@ -76,19 +77,13 @@ public class StageList implements List {
         return list.get(key).getActivityList();
     }
 
-    public boolean addContributor(String stageName, String contributorName) {
-        return contributorList.addContributor(stageName, contributorName);
-
+    public boolean addContributor(String stageName, String name, Contributor contributor) {
+        return list.get(stageName).addContributor(name, contributor);
     }
 
-    public void editContributor(String name, EditContributor edit, String input) {
-        contributorList.editContributor(name, edit, input);
-
-    }
-
-    public void removeContributor(String name) {
-        contributorList.removeContributor(name);
-    }
+   // public void removeContributor(String name) {
+   //     contributorList.removeContributor(name);
+   // }
 }
 
 

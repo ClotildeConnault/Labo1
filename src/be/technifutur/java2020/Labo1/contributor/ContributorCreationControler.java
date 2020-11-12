@@ -16,29 +16,18 @@ public class ContributorCreationControler extends ContributorControler {
     }
 
     @Override
-    public void run(String key) {
-
-    }
-
-    @Override
     public void run() {
 
 
         String name;
-        String stage;
         String input;
-        do {
-            vue.consigneAjoutStage();
-            stage = scan.nextLine();
-
-        } while(!mainControler.stageExists(stage));
 
         vue.consignePrenom();
         name = scan.nextLine();
         vue.consigneNom();
         name += " " + scan.nextLine();
 
-        if (!contributorList.addContributor(stage, name)) {
+        if (!contributorList.addContributor(activeStage, name)) {
             vue.doublon();
             vue.demandeModifON();
             input = scan.nextLine();
@@ -48,6 +37,7 @@ public class ContributorCreationControler extends ContributorControler {
             }
         }
         else {
+            stageList.addContributor(activeStage, name, contributorList.getContributor(name));
             do {
                 vue.demandeEmail();
                 input = scan.nextLine();

@@ -16,11 +16,6 @@ public class StageCreationControler extends Controler {
         this.vue = (StageVue) vue;
     }
 
-    @Override
-    public void run(String key) {
-
-    }
-
     public void setModel(StageList list) {
         this.list = list;
     }

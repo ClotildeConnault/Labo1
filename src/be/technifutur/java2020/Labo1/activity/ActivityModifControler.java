@@ -26,9 +26,6 @@ public class ActivityModifControler extends Controler {
         this.vue = (ActivityVue) vue;
     }
 
-    @Override
-    public void run(String key) {
-    }
 
     @Override
     public void run() {

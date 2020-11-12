@@ -1,14 +1,9 @@
 package be.technifutur.java2020.Labo1.activity;
-
-import be.technifutur.java2020.Labo1.Controler;
-import be.technifutur.java2020.Labo1.List;
-import be.technifutur.java2020.Labo1.Menu;
 import be.technifutur.java2020.Labo1.Vue;
 import be.technifutur.java2020.Labo1.stage.StageList;
-
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
-import java.util.Scanner;
+
 
 public class ActivityCreationControler extends ActivityControler {
 
@@ -16,7 +11,7 @@ public class ActivityCreationControler extends ActivityControler {
     private LocalDateTime dateTest;
 
     public void setModel(StageList list) {
-        this.list = list;
+        this.stageList = list;
     }
 
     @Override
@@ -26,16 +21,12 @@ public class ActivityCreationControler extends ActivityControler {
 
     public void run() {
 
-    }
-
-    public void run(String key) {
-
         vue.consigneCreaActivity();
 
             vue.consigneNomActivity();
             activityKey = scan.nextLine();
-            ActivityList activityList = list.getActivities(key);
-            list.addActivity(activeStage, activityKey);
+            ActivityList activityList = stageList.getActivities(activeStage);
+            stageList.addActivity(activeStage, activityKey);
             boolean dateTimeException = false;
             String input = null;
 
@@ -68,7 +59,6 @@ public class ActivityCreationControler extends ActivityControler {
                             Integer.valueOf(input.substring(14))
                     );
 
-
                 } catch (DateTimeException e) {
                     dateTimeException = true;
                     System.out.println(e);
@@ -81,7 +71,7 @@ public class ActivityCreationControler extends ActivityControler {
                 vue.consigneDuree();
                 input = scan.nextLine();
 
-            } while (!isDureeFormatValid(input) || !isDureeValid(activeStage, input));
+            } while (!isDureeFormatValid(input) || !isDureeValid(input));
 
             activityList.setDuree(activityKey, Integer.parseInt(input));
             vue.succes();
@@ -91,20 +81,21 @@ public class ActivityCreationControler extends ActivityControler {
     private boolean isDateValid(String nomStage, LocalDateTime date) {
         boolean isValid = true;
 
-        if ((!date.isAfter(list.getDateDebut(nomStage)) && !date.equals(list.getDateDebut(nomStage))
-                || !date.isBefore(list.getDateFin(nomStage)))){
+        if ((!date.isAfter(stageList.getDateDebut(nomStage)) && !date.equals(stageList.getDateDebut(nomStage))
+                || !date.isBefore(stageList.getDateFin(nomStage)))){
             isValid = false;
             System.out.println("La date de début doit être comprise dans la durée du stage");
         }
         return isValid;
     }
 
-    private boolean isDureeValid(String nomStage, String duree) {
+    private boolean isDureeValid(String duree) {
         boolean isValid = true;
         int d = Integer.parseInt(duree);
-        LocalDateTime test = list.getDateDebut(nomStage).plusMinutes((long)d);
 
-        if (test.isAfter(list.getDateFin(nomStage))) {
+        LocalDateTime test = activityList.getDateDebut(activityKey).plusMinutes((long)d);
+
+        if (test.isAfter(stageList.getDateFin(activeStage))) {
             isValid = false;
             System.out.println("La durée de l'activité doit être comprise dans la durée du stage");
         }

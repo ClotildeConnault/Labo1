@@ -30,11 +30,19 @@ public class Contributor {
     }
 
     public String getEmail() {
-        return email;
+        String s = email;
+        if (email == null) {
+            s = "";
+        }
+        return s;
     }
 
     public String getClub() {
-        return club;
+        String s = club;
+        if (club == null) {
+            s = "";
+        }
+        return s;
     }
 
     public boolean addStage(String name) {

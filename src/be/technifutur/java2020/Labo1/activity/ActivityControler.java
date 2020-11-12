@@ -9,9 +9,14 @@ public class ActivityControler extends Controler {
 
     protected ActivityVue vue;
     private ActivityMenu menu;
-    private TreeMap<ControlerType, Controler> controlerList;
-    protected StageList list;
+    protected TreeMap<ControlerType, Controler> controlerList;
+    protected StageList stageList;
     protected String activeStage;
+    protected ActivityList activityList;
+
+    public void setActivityList() {
+        activityList = stageList.getActivities(activeStage);
+    }
 
     public ActivityControler() {
         controlerList = new TreeMap<>();
@@ -19,6 +24,12 @@ public class ActivityControler extends Controler {
 
     public void setActiveStage(String activeStage) {
         this.activeStage = activeStage;
+        setActivityList();
+        for (Controler c : controlerList.values()) {
+            if (c instanceof ActivityControler) {
+                ((ActivityControler) c).setActiveStage(activeStage);
+            }
+        }
     }
 
     @Override
@@ -31,7 +42,7 @@ public class ActivityControler extends Controler {
     }
 
     public void setModel(StageList list) {
-        this.list = list;
+        this.stageList = list;
     }
 
     public void addControler(ControlerType key, Controler controler) {
@@ -41,6 +52,7 @@ public class ActivityControler extends Controler {
     public void run() {
         String input = null;
         do {
+            vue.setActiveStage(activeStage);
             menu.displayMenuPrincipal();
             input = null;
 
@@ -65,6 +77,14 @@ public class ActivityControler extends Controler {
                 case "4":
                     vue.displayActivities();
                     break;
+                case "5":
+                    vue.selectActivity();
+                    input = scan.nextLine();
+                    if (existsActivity(input)) {
+                        ((ActivityRegisterControler)controlerList.get(ControlerType.ACTIVITYREGISTERCONTROLER)).setActiveActivity(input);
+                        controlerList.get(ControlerType.ACTIVITYREGISTERCONTROLER).run();
+                    }
+                    break;
                 case "q" :
                     controlerList.get(ControlerType.MAINCONTROLER).run();
 
@@ -73,6 +93,15 @@ public class ActivityControler extends Controler {
         } while (!input.equalsIgnoreCase("q"));
 
         vue.messageSortie();
+    }
+
+    private boolean existsActivity(String key) {
+        boolean exists = true;
+        if (!stageList.getList().get(activeStage).existsActivity(key)){
+            exists = false;
+            vue.doesNotExist();
+        }
+        return exists;
     }
 
 }

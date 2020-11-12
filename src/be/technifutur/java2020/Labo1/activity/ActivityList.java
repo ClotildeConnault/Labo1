@@ -4,6 +4,7 @@ import be.technifutur.java2020.Labo1.Event;
 import be.technifutur.java2020.Labo1.EventType;
 import be.technifutur.java2020.Labo1.List;
 import be.technifutur.java2020.Labo1.activity.Activity;
+import be.technifutur.java2020.Labo1.contributor.Contributor;
 
 import java.time.LocalDateTime;
 import java.util.TreeMap;
@@ -46,8 +47,16 @@ public class ActivityList implements List {
     }
 
     @Override
-    public LocalDateTime getDateDebut(String key) {
-        return list.get(key).getDateDebut();
+    public LocalDateTime getDateDebut(String activityName) {
+        return list.get(activityName).getDateDebut();
+    }
+
+    public boolean register(String activityName, Contributor contributor) {
+        return list.get(activityName).register(contributor);
+    }
+
+    public boolean unregister(String activityName, Contributor contributor) {
+        return list.get(activityName).unregister(contributor);
     }
 
 }

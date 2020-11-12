@@ -1,17 +1,28 @@
 package be.technifutur.java2020.Labo1.activity;
 
-import be.technifutur.java2020.Labo1.Event;
-import be.technifutur.java2020.Labo1.List;
 import be.technifutur.java2020.Labo1.Vue;
+import be.technifutur.java2020.Labo1.stage.StageList;
 
 import java.time.format.DateTimeFormatter;
 import java.util.Map;
 
 public class ActivityVue extends Vue {
 
-    private ActivityList list;
-    public void setModel(ActivityList list) {
-        this.list = list;
+    private ActivityList activityList;
+    private StageList stageList;
+    private String activeStage;
+
+    public void setModel(StageList stageList) {
+        this.stageList = stageList;
+    }
+
+    public void setActivityList() {
+        activityList = stageList.getActivities(activeStage);
+    }
+
+    public void setActiveStage(String stageName) {
+        activeStage = stageName;
+        setActivityList();
     }
 
     public void displayActivities() {
@@ -23,10 +34,10 @@ public class ActivityVue extends Vue {
 
 
 
-        for (Map.Entry<String, Activity> entry : list.getList().entrySet()) {
+        for (Map.Entry<String, Activity> entry : activityList.getList().entrySet()) {
             System.out.print(
                     entry.getKey() + " " +
-                            list.getDateDebut(entry.getKey()).format(formatter) + " "
+                            activityList.getDateDebut(entry.getKey()).format(formatter) + " "
             );
             System.out.println();
         }
@@ -36,8 +47,8 @@ public class ActivityVue extends Vue {
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
         System.out.println(
-                this.list.getList().get(key).getName() + " " +
-                        this.list.getDateDebut(key).format(formatter) + " "
+                this.activityList.getList().get(key).getName() + " " +
+                        this.activityList.getDateDebut(key).format(formatter) + " "
         );
     }
 
@@ -58,8 +69,16 @@ public class ActivityVue extends Vue {
         System.out.println("Entrez le nom de l'activité");
     }
 
+    public void selectActivity() {
+        System.out.println("Entrez le nom de l'activité pour laquelle vous voulez gérer les inscriptions");
+    }
+
     public void doesNotExist() {
         System.out.println("Cette activité n'existe pas");
+    }
+
+    public void consigneContributorName() {
+        System.out.println("Entrez le nom du participant que vous voulez inscrire");
     }
 
 }

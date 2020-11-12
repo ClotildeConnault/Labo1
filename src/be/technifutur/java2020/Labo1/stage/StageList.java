@@ -1,6 +1,7 @@
 package be.technifutur.java2020.Labo1.stage;
 
 import be.technifutur.java2020.Labo1.*;
+import be.technifutur.java2020.Labo1.activity.Activity;
 import be.technifutur.java2020.Labo1.activity.ActivityList;
 import be.technifutur.java2020.Labo1.contributor.Contributor;
 import be.technifutur.java2020.Labo1.contributor.EditContributor;
@@ -8,6 +9,7 @@ import be.technifutur.java2020.Labo1.contributor.ContributorList;
 
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.TreeMap;
 
 public class StageList implements List {
@@ -48,8 +50,8 @@ public class StageList implements List {
     }
 
     @Override
-    public LocalDateTime getDateDebut(String key) {
-        return list.get(key).getDateDebut();
+    public LocalDateTime getDateDebut(String stageName) {
+        return list.get(stageName).getDateDebut();
     }
 
 
@@ -64,21 +66,27 @@ public class StageList implements List {
     }
 
     public void addActivity(String key, String name) {
-        System.out.println("StageList.addActivity");
-        System.out.println(list.getClass());
-        System.out.println(list.size());
-        System.out.println(list.firstKey());
-        System.out.println(key);
-        System.out.println(list.containsKey(key));
         list.get(key).addActivity(name);
     }
 
-    public ActivityList getActivities(String key) {
-        return list.get(key).getActivityList();
+    public ActivityList getActivities(String stageName) {
+        return list.get(stageName).getActivityList();
+    }
+
+    public Activity getActivity(String stageName, String activityName) {
+        return list.get(stageName).getActivity(activityName);
     }
 
     public boolean addContributor(String stageName, String name, Contributor contributor) {
         return list.get(stageName).addContributor(name, contributor);
+    }
+
+    public ContributorList getContributorList(String stageName) {
+        return list.get(stageName).getContributorList();
+    }
+
+    public TreeMap<String, Contributor> getAllContributors() {
+        return contributorList.getContributors();
     }
 
    // public void removeContributor(String name) {

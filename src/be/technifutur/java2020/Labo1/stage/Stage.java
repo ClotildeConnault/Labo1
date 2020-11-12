@@ -1,5 +1,6 @@
 package be.technifutur.java2020.Labo1.stage;
 
+import be.technifutur.java2020.Labo1.activity.Activity;
 import be.technifutur.java2020.Labo1.contributor.Contributor;
 import be.technifutur.java2020.Labo1.contributor.ContributorList;
 import be.technifutur.java2020.Labo1.Event;
@@ -23,8 +24,8 @@ public class Stage extends Event {
 
     public void setDateFin(int year, int month, int day, int hour, int min) throws DateTimeException {
         LocalDateTime date = LocalDateTime.of(year, month, day, hour, min);
-        if (date.isBefore(this.dateDebut)) {
-            throw new DateTimeException("La date de fin est incohérente par rapport à la date de début");
+        if (date.isBefore(this.dateDebut.plusHours(1))) {
+            throw new DateTimeException("Le stage doit durer au moins 1h");
         }
         else {
             dateFin = date;
@@ -48,12 +49,20 @@ public class Stage extends Event {
         return activityList;
     }
 
+    public Activity getActivity(String key) {
+        return activityList.getList().get(key);
+    }
+
     public ContributorList getContributorList() {
         return contributorList;
     }
 
     public boolean addContributor(String name, Contributor contributor) {
         return contributorList.addContributor(name, contributor);
+    }
+
+    public boolean existsActivity(String activityName) {
+        return activityList.getList().containsKey(activityName);
     }
 /*
     public boolean removeContributor(String name) {

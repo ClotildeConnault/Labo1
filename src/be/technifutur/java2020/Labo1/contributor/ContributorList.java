@@ -41,6 +41,10 @@ public class ContributorList {
         return contributors.get(name);
     }
 
+    public TreeMap<String, Contributor> getContributors() {
+        return contributors;
+    }
+
     public void editContributor(String name, EditContributor edit, String input) {
         switch (edit) {
             case CLUB:
@@ -57,6 +61,5 @@ public class ContributorList {
                 break;
         }
     }
-
 
 }

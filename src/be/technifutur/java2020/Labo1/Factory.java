@@ -28,6 +28,7 @@ public class Factory {
     private ContributorCreationControler contributorCreationControler;
     private ContributorEditControler contributorEditControler;
     private ContributorVue contributorVue;
+    private ActivityRegisterControler activityRegisterControler;
 
 
 
@@ -62,12 +63,6 @@ public class Factory {
         return stageList;
     }
 
-    public ContributorList getContributorList() {
-        if (contributorList == null) {
-            contributorList = new ContributorList();
-        }
-        return contributorList;
-    }
 
     public MenuPrincipal getMenuPrincipal() {
         if (menuPrincipal == null) {
@@ -108,14 +103,27 @@ public class Factory {
             activityControler.setModel(getStageList());
             activityControler.addControler(ControlerType.ACTIVITYCREATIONCONTROLER, getActivityCreationControler());
             activityControler.addControler(ControlerType.MAINCONTROLER, getMainControler());
+            activityControler.addControler(ControlerType.ACTIVITYREGISTERCONTROLER, getActivityRegisterControler());
 
         }
         return activityControler;
     }
 
+    private ActivityRegisterControler getActivityRegisterControler() {
+        if (activityRegisterControler == null) {
+            activityRegisterControler = new ActivityRegisterControler();
+            activityRegisterControler.setMenu(new ActivityRegisterMenu());
+            activityRegisterControler.setModel(getStageList());
+            activityRegisterControler.setVue(getActivityVue());
+            activityRegisterControler.addControler(ControlerType.CONTRIBUTORCONTROLER, getContributorControler());
+        }
+        return activityRegisterControler;
+    }
+
     public ActivityVue getActivityVue() {
         if (activityVue == null) {
             activityVue = new ActivityVue();
+            activityVue.setModel(getStageList());
         }
         return activityVue;
     }
@@ -136,10 +144,17 @@ public class Factory {
         return activityCreationControler;
     }
 
+    public ContributorList getContributorList() {
+        if (contributorList == null) {
+            contributorList = new ContributorList();
+        }
+        return contributorList;
+    }
+
     public ContributorControler getContributorControler() {
         if (contributorControler == null) {
             contributorControler = new ContributorControler();
-            contributorControler.setVue(new ContributorVue());
+            contributorControler.setVue(getContributorVue());
             contributorControler.setModel(getContributorList());
             contributorControler.setModel(getStageList());
             contributorControler.addControler(ControlerType.CONTRIBUTORCREATIONCONTROLER, getContributorCreationControler());
@@ -164,6 +179,7 @@ public class Factory {
             contributorCreationControler = new ContributorCreationControler();
             contributorCreationControler.setVue(getContributorVue());
             contributorCreationControler.setModel(getContributorList());
+            contributorCreationControler.setModel(getStageList());
             contributorCreationControler.addControler(ControlerType.CONTRIBUTOREDITCONTROLER, getContributorEditControler());
         }
         return contributorCreationControler;
@@ -173,6 +189,7 @@ public class Factory {
     private ContributorVue getContributorVue() {
         if (contributorVue == null) {
             contributorVue = new ContributorVue();
+            contributorVue.setModel(getContributorList());
         }
         return contributorVue;
     }

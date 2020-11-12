@@ -114,6 +114,10 @@ public class MainControler extends Controler {
                         }
                     }
                     break;
+                case "8":
+                        vue.displayContributors();
+
+                    break;
             }
 
         } while (!input.equalsIgnoreCase("q"));

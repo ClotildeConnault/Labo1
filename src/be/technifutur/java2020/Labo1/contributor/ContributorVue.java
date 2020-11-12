@@ -3,9 +3,29 @@ package be.technifutur.java2020.Labo1.contributor;
 import be.technifutur.java2020.Labo1.Vue;
 
 public class ContributorVue extends Vue {
+
+    private ContributorList contributorList;
+
+    public void setModel(ContributorList contributorList) {
+        this.contributorList = contributorList;
+    }
+
     @Override
     public void doesNotExist() {
+        System.out.println("Ce contributeur n'existe pas");
+    }
 
+    public void displayContributor(Contributor contributor) {
+        System.out.println(contributor.getName() + " " +
+                contributor.getEmail() + " " +
+                contributor.getClub()
+        );
+    }
+
+    public void displayContributors() {
+        for (Contributor c : contributorList.getContributors().values()) {
+            displayContributor(c);
+        }
     }
 
     public void consignePrenom() {

@@ -4,6 +4,7 @@ import be.technifutur.java2020.Labo1.Event;
 import be.technifutur.java2020.Labo1.List;
 import be.technifutur.java2020.Labo1.Vue;
 import be.technifutur.java2020.Labo1.activity.Activity;
+import be.technifutur.java2020.Labo1.contributor.Contributor;
 
 import java.time.Duration;
 import java.time.LocalDate;
@@ -85,8 +86,19 @@ public class StageVue extends Vue {
         }
     }
 
+    public void displayContributors() {
+        for (Contributor c : list.getAllContributors().values()) {
+            System.out.println(
+                            c.getName() + " " +
+                            c.getClub() + " " +
+                            c.getEmail()
+            );
+        }
+    }
+
+
     public void consigneActivityStage() {
-        System.out.println("Entrez le nom du stage auquel vous voulez ajouter une activité");
+        System.out.println("Entrez le nom du stage auquel vous voulez gérer les activités");
     }
 
     public void consigneChoixStageModif() {

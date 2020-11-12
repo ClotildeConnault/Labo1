@@ -37,7 +37,7 @@ public class ContributorCreationControler extends ContributorControler {
             }
         }
         else {
-            stageList.addContributor(activeStage, name, contributorList.getContributor(name));
+            list.addContributor(activeStage, name, contributorList.getContributor(name));
             do {
                 vue.demandeEmail();
                 input = scan.nextLine();

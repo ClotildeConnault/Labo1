@@ -12,6 +12,7 @@ public class ActivityMenu extends Menu {
         options.put("2", "Modifier une activité");
         options.put("3", "Supprimer une activité");
         options.put("4", "Afficher les activités");
+        options.put("5", "Gérer les inscriptions");
         options.put("Q", "Retour au menu principal");
     }
 

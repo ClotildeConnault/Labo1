@@ -15,7 +15,8 @@ public class MenuPrincipal extends Menu {
         options.put("4", "Afficher les stages");
         options.put("5", "Gérer les activités");
         options.put("6", "Afficher le planning d'un stage");
-        options.put("7", "Gérer les participants");
+        options.put("7", "Gérer les participants d'un stage");
+        options.put("8", "Afficher la liste complète des participants");
         options.put("Q", "Quitter");
     }
 

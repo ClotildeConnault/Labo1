@@ -5,13 +5,12 @@ import be.technifutur.java2020.Labo1.stage.StageList;
 
 import java.util.TreeMap;
 
-public class ContributorControler extends Controler {
+public class ContributorControler extends MainControler {
 
     protected ContributorVue vue;
     protected ContributorList contributorList;
     protected MenuContributor menu;
     protected TreeMap<ControlerType, Controler> controlerList;
-    protected StageList stageList;
     protected String activeStage;
 
     @Override
@@ -25,13 +24,32 @@ public class ContributorControler extends Controler {
         contributorList = list;
     }
     public void setModel(StageList stageList) {
-        this.stageList = stageList;
+        this.list = stageList;
     }
+    public ContributorList getContributorList() {
+        return contributorList;
+    }
+
     public void setActiveStage(String stage) {
         activeStage = stage;
+        for (Controler c : controlerList.values()) {
+            if (c instanceof ContributorControler) {
+                ((ContributorControler)c).setActiveStage(stage);
+            }
+        }
     }
+
     public void addControler(ControlerType key, Controler controler) {
         controlerList.put(key, controler);
+    }
+
+    public boolean existsContributor(String name) {
+        boolean exists = true;
+        if (!contributorList.getContributors().containsKey(name)) {
+            exists = false;
+            vue.doesNotExist();
+        }
+        return exists;
     }
 
 
@@ -49,6 +67,7 @@ public class ContributorControler extends Controler {
             case "3":
                 break;
             case "4" :
+                vue.displayContributors();
                 break;
             case "Q":
                 controlerList.get(ControlerType.MAINCONTROLER).run();

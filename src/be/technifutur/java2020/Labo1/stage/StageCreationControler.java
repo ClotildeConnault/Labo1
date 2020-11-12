@@ -72,8 +72,6 @@ public class StageCreationControler extends Controler {
                         Integer.valueOf(input.substring(14))
                 );
 
-
-
             } catch (DateTimeException e){
                 dateTimeException = true;
                 System.out.println(e);

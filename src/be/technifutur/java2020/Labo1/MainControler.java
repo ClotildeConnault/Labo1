@@ -6,14 +6,15 @@ import be.technifutur.java2020.Labo1.stage.*;
 
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
+import java.time.DateTimeException;
 import java.util.TreeMap;
 
 public class MainControler extends Controler {
 
     protected StageList list;
     protected StageVue vue;
-    private MenuPrincipal menu;
-    private TreeMap<ControlerType, Controler> controlerList;
+    protected MenuPrincipal menu;
+    protected TreeMap<ControlerType, Controler> controlerList;
 
     public MainControler() {
         controlerList = new TreeMap<>();
@@ -55,7 +56,7 @@ public class MainControler extends Controler {
                     controlerList.get(ControlerType.STAGECREATIONCONTROLER).run();
                     break;
                 case "2":
-                    controlerList.get(ControlerType.STAGEMODIFCONTROLER).run();
+                    controlerList.get(ControlerType.STAGEEDITCONTROLER).run();
                     break;
                 case "3":
                     controlerList.get(ControlerType.STAGESUPPRESSIONCONTROLER).run();
@@ -137,6 +138,65 @@ public class MainControler extends Controler {
             exists = false;
         }
         return exists;
+    }
+
+    public void setDateDebut(String nomStage) {
+        boolean dateTimeException = false;
+        String input = null;
+
+        do {
+            dateTimeException = false;
+            try {
+                do {
+                    vue.consigneDateDebut();
+                    input = scan.nextLine();
+                } while (!isDateFormatValid(input));
+
+                list.setDateDebut(
+                        nomStage,
+                        Integer.valueOf(input.substring(0, 4)),
+                        Integer.valueOf(input.substring(5, 7)),
+                        Integer.valueOf(input.substring(8, 10)),
+                        Integer.valueOf(input.substring(11, 13)),
+                        Integer.valueOf(input.substring(14))
+                );
+
+
+            } catch (DateTimeException e){
+                dateTimeException = true;
+                System.out.println(e);
+            }
+
+        } while (dateTimeException);
+    }
+
+    public void setDateFin(String nomStage) {
+        boolean dateTimeException = false;
+        String input = null;
+
+        do {
+            dateTimeException = false;
+            try {
+                do {
+                    vue.consigneDateFin();
+                    input = scan.nextLine();
+                } while (!isDateFormatValid(input));
+
+                list.setDateFin(
+                        nomStage,
+                        Integer.valueOf(input.substring(0, 4)),
+                        Integer.valueOf(input.substring(5, 7)),
+                        Integer.valueOf(input.substring(8, 10)),
+                        Integer.valueOf(input.substring(11, 13)),
+                        Integer.valueOf(input.substring(14))
+                );
+
+            } catch (DateTimeException e){
+                dateTimeException = true;
+                System.out.println(e);
+            }
+
+        } while (dateTimeException);
     }
 
 

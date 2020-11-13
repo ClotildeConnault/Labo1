@@ -13,7 +13,9 @@ public class Main {
         Factory factory = new Factory();
         factory.getMainControler().run();
 
-
+        //TODO erreur si nom stage existe déjà !
+        //TODO finir la serialization (regrouper les modèles dans un objet pour la sauvegarde, les récupérer et les réinjecter à l'ouverture)
+//TODO regroupement du code des Event (bosser sur les toString et l'affichage)
         //TODO inscription à une activité : interdire si personne déjà inscrite à une autre activité qui a lieu en même temps
 
         //TODO ajouter message de réussite à la création d'un intervenant

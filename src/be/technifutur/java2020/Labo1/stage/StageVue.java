@@ -3,6 +3,8 @@ package be.technifutur.java2020.Labo1.stage;
 import be.technifutur.java2020.Labo1.Event;
 import be.technifutur.java2020.Labo1.Vue;
 import be.technifutur.java2020.Labo1.contributor.Contributor;
+import be.technifutur.java2020.price.Price;
+import be.technifutur.java2020.price.StagePriceList;
 
 import java.time.Duration;
 import java.time.LocalDate;
@@ -94,9 +96,43 @@ public class StageVue extends Vue {
         }
     }
 
+    public void displayDiscounts(String stageName) {
+        StagePriceList stagePriceList = list.getPriceList(stageName);
+
+            for (Price price : stagePriceList.getStagePriceList().values()) {
+                System.out.println(price.getName());
+            }
+    }
+
+    public void noDiscounts() {
+        System.out.println("Il n'y a pour l'instant aucune réduction");
+    }
+
+    public void demandeAjoutDiscount() {
+        System.out.println("Voulez-vous ajouter une réduction ? (O/N)");
+    }
+    public void demandeSupprDiscount() {
+        System.out.println("Voulez-vous supprimer une réduction ? (O/N)");
+    }
+
+    public void demandeDiscount() {
+        System.out.println("Voulez-vous ajouter des réductions pour ce stage? (O/N)");
+    }
+
+    public void consigneChoixDiscount() {
+        System.out.println("Quelle réduction souhaitez-vous rendre disponible pour ce stage?");
+    }
+
+    public void discountAdded() {
+        System.out.println("La réduction a été ajoutée avec succès");
+    }
+
+    public void consigneEditStage() {
+        System.out.println("Entrez le nom du stage que vous souhaitez modifier");
+    }
 
     public void consigneActivityStage() {
-        System.out.println("Entrez le nom du stage auquel vous voulez gérer les activités");
+        System.out.println("Entrez le nom du stage dont vous voulez gérer les activités");
     }
 
     public void consigneChoixStageModif() {

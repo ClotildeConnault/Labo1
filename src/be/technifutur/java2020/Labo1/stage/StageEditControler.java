@@ -1,44 +1,69 @@
 package be.technifutur.java2020.Labo1.stage;
 
 import be.technifutur.java2020.Labo1.*;
+import be.technifutur.java2020.price.StagePriceList;
 
 public class StageEditControler extends MainControler {
 
-    private StageEditMenu menu;
+    private StageEditMenu editMenu;
+    private String activeStage;
 
-    public void setModel(StageList list) {
-        this.list = list;
+    public void setEditMenu(StageEditMenu editMenu) {
+        this.editMenu = editMenu;
     }
 
-    public void setMenu(StageEditMenu menu) {
-        this.menu = menu;
-    }
-
-    @Override
-    public void setVue(Vue vue) {
-        this.vue = (StageVue) vue;
-    }
 
     @Override
     public void run() {
         String input = null;
 
-        vue.consigneActivityStage();
+        vue.consigneEditStage();
         vue.displayStages();
         input = scan.nextLine();
         if (stageExists(input)) {
-            menu.displayMenu();
-            if (menu.getChoice() != null) {
-                String key = input.toUpperCase();
-                switch (key) {
+            activeStage = input;
+            editMenu.displayMenu();
+            input = editMenu.getChoice();
+            if (input != null) {
+
+                switch (input.toUpperCase()) {
                     case "1" :
-                        vue.consigneDateDebut();
+
                         break;
                     case "2" :
+                        setDateDebut(activeStage);
+                        setDateFin(activeStage);
                         break;
                     case "3" :
+                        if (isEmptyStagePriceList()) {
+                            vue.noDiscounts();
+                        }
+                        else {
+                            vue.displayDiscounts(activeStage);
+                        }
+                        do {
+                            vue.demandeAjoutDiscount();
+                            input = scan.nextLine();
+                        } while (!isONValid(input));
+
+                        if (input.equalsIgnoreCase("o")) {
+
+                        }
+
+                        if (!isEmptyStagePriceList()) {
+                            do {
+                                vue.demandeSupprDiscount();
+                                input = scan.nextLine();
+                            } while (!isONValid(input));
+
+                            if (input.equalsIgnoreCase("o")) {
+
+                            }
+                        }
+                        run();
                         break;
                     case "Q":
+                        controlerList.get(ControlerType.MAINCONTROLER).run();
                         break;
                 }
 
@@ -50,6 +75,15 @@ public class StageEditControler extends MainControler {
         else {
             vue.doesNotExist();
         }
+    }
+
+    private boolean isEmptyStagePriceList() {
+        boolean isEmpty = false;
+        StagePriceList stagePriceList = list.getPriceList(activeStage);
+        if (stagePriceList.getStagePriceList().size() == 0) {
+            isEmpty = true;
+        }
+        return isEmpty;
     }
 
 }

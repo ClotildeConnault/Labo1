@@ -8,8 +8,8 @@ public class StageEditMenu extends Menu {
     public StageEditMenu() {
         options = new TreeMap<>();
         options.put("1", "Changer le nom du stage");
-        options.put("2", "Changer la date de début");
-        options.put("3", "Changer la date de fin");
+        options.put("2", "Changer les dates ");
+        options.put("3", "Ajouter ou supprimer des réductions");
         options.put("Q", "Retour");
     }
 

@@ -10,7 +10,6 @@ import java.util.Arrays;
 
 public class Factory {
     public static final String filepath="C:\\Users\\cloti\\OneDrive\\Documents\\Java base\\java2020Labo1\\src\\be\\technifutur\\java2020\\backup.save";
-
     private MainControler mainControler;
     private StageCreationControler stageCreationControler;
     private StageEditControler stageEditControler;
@@ -31,8 +30,19 @@ public class Factory {
     private ContributorEditControler contributorEditControler;
     private ContributorVue contributorVue;
     private ActivityRegisterControler activityRegisterControler;
+    private StagePriceControler stagePriceControler;
 
 
+    public StagePriceControler getStagePriceControler() {
+        if (stagePriceControler == null) {
+            stagePriceControler = new StagePriceControler();
+            stagePriceControler.setMenu(getMenuPrincipal());
+            stagePriceControler.setPriceMenu(new StagePriceMenu());
+            stagePriceControler.setVue(getStageVue());
+            stagePriceControler.setModel(getStageList());
+        }
+        return stagePriceControler;
+    }
 
     public MainControler getMainControler() {
         if(mainControler == null) {
@@ -41,7 +51,7 @@ public class Factory {
             mainControler.setModel(getStageList());
             mainControler.setMenu(getMenuPrincipal());
             mainControler.addControler(ControlerType.STAGECREATIONCONTROLER, getStageCreationControler());
-            mainControler.addControler(ControlerType.STAGEMODIFCONTROLER, getStageModifControler());
+            mainControler.addControler(ControlerType.STAGEEDITCONTROLER, getStageEditControler());
             mainControler.addControler(ControlerType.STAGESUPPRESSIONCONTROLER, getStageSuppressionControler());
             mainControler.addControler(ControlerType.ACTIVITYCONTROLER, getActivityControler());
             mainControler.addControler(ControlerType.CONTRIBUTORCONTROLER, getContributorControler());
@@ -77,9 +87,12 @@ public class Factory {
             {
                 System.out.println("IOException is caught");
                 ex.printStackTrace();
+                stageList = new StageList();
+
             } catch(ClassNotFoundException ex)
             {
                 System.out.println("ClassNotFoundException is caught");
+                stageList = new StageList();
             }
            // stageList = new StageList();
             //stageList.setContributorList(getContributorList());
@@ -100,14 +113,19 @@ public class Factory {
             stageCreationControler = new StageCreationControler();
             stageCreationControler.setVue(getStageVue());
             stageCreationControler.setModel(getStageList());
+            stageCreationControler.addControler(ControlerType.STAGEPRICECONTROLER, getStagePriceControler());
         }
         return stageCreationControler;
     }
 
-    public StageEditControler getStageModifControler() {
+    public StageEditControler getStageEditControler() {
         if (stageEditControler == null) {
             stageEditControler = new StageEditControler();
-            stageEditControler.setMenu(stageEditMenu);
+            stageEditControler.setEditMenu(new StageEditMenu());
+            stageEditControler.setVue(getStageVue());
+            stageEditControler.setModel(getStageList());
+            stageEditControler.setMenu(getMenuPrincipal());
+            stageEditControler.addControler(ControlerType.MAINCONTROLER, getMainControler());
         }
         return stageEditControler;
     }

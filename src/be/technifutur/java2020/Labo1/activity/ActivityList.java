@@ -12,7 +12,6 @@ import java.util.TreeMap;
 
 public class ActivityList implements List, Serializable {
 
-
     private static final long serialVersionUID = 4398595323974488505L;
     private TreeMap<String, Activity> list;
 

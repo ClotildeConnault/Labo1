@@ -1,33 +1,23 @@
 package be.technifutur.java2020.Labo1;
-
-import be.technifutur.java2020.Labo1.activity.ActivityControler;
-import be.technifutur.java2020.Labo1.contributor.ContributorControler;
 import be.technifutur.java2020.Labo1.stage.*;
-
-import java.io.FileOutputStream;
-import java.io.ObjectOutputStream;
 import java.time.DateTimeException;
-import java.util.TreeMap;
+
 
 public class MainControler extends Controler {
 
     protected StageList list;
     protected StageVue vue;
-    protected MenuPrincipal menu;
-    protected TreeMap<ControlerType, Controler> controlerList;
+    protected Menu menu;
 
     public MainControler() {
-        controlerList = new TreeMap<>();
+        type = ControlerType.MAINCONTROLER;
+        generalType.add(ControlerType.STAGE);
+        generalType.add(ControlerType.MAIN);
+
     }
 
     public void setModel(StageList list) {
         this.list = list;
-    }
-    public void setMenu(MenuPrincipal menu) {
-        this.menu = menu;
-    }
-    public void addControler(ControlerType key, Controler controler) {
-        controlerList.put(key, controler);
     }
 
 
@@ -37,98 +27,33 @@ public class MainControler extends Controler {
     }
 
     @Override
+    public String toString() {
+        return "Menu Principal";
+    }
+
+    @Override
     public void run() {
-        String input = null;
+        String input;
+        menu = new Menu(controlerList.getControlerList());
+
         do {
-            menu.displayMenuPrincipal();
+            menu.displayMenu();
             input = null;
 
             do {
                 input = menu.getChoice();
                 if (input == null) {
                     vue.erreurInputMenu();
-                    menu.displayMenuPrincipal();
+                    menu.displayMenu();
                 }
             } while (input == null);
 
-            switch (input) {
-                case "1":
-                    controlerList.get(ControlerType.STAGECREATIONCONTROLER).run();
-                    break;
-                case "2":
-                    controlerList.get(ControlerType.STAGEEDITCONTROLER).run();
-                    break;
-                case "3":
-                    controlerList.get(ControlerType.STAGESUPPRESSIONCONTROLER).run();
-                    break;
-                case "4":
-                    if (!list.getList().isEmpty()) {
-                        vue.displayStages();
-                    }
-                    else {
-                        vue.noStages();
-                    }
-                    break;
-                case "5":
-                    if (!list.getList().isEmpty()) {
-                        vue.consigneActivityStage();
-                        vue.displayStages();
-                        String stageName = scan.nextLine();
-
-                        if (!list.getList().containsKey(stageName)) {
-                            vue.doesNotExist();
-                        }
-                        else {
-                            ((ActivityControler)controlerList.get(ControlerType.ACTIVITYCONTROLER)).setActiveStage(stageName);
-                            controlerList.get(ControlerType.ACTIVITYCONTROLER).run();
-                        }
-                    }
-                    else {
-                        vue.noStages();
-                    }
-                    break;
-                case "6":
-                    if (list.getList().isEmpty()) {
-                        vue.noStages();
-                    }
-                    else {
-                        vue.displayStages();
-                        vue.consigneAffichePlanning();
-                        input = scan.nextLine();
-                        if (stageExists(input)) {
-                            vue.displayStageSchedule(input);
-                        }
-                    }
-                    break;
-                case "7":
-                    if (list.getList().isEmpty()) {
-                        vue.noStages();
-                    }
-                    else {
-                        vue.displayStages();
-                        vue.consigneContributorStage();
-                        input = scan.nextLine();
-                        if (stageExists(input)) {
-                            ((ContributorControler)controlerList.get(ControlerType.CONTRIBUTORCONTROLER)).setActiveStage(input);
-                            controlerList.get(ControlerType.CONTRIBUTORCONTROLER).run();
-                        }
-                        else {
-                            run();
-                        }
-                    }
-                    break;
-                case "8":
-                        vue.displayContributors();
-
-                    break;
-            }
+            ((Controler)menu.getOption(input)).run();
 
         } while (!input.equalsIgnoreCase("q"));
 
         vue.messageSortie();
 
-        writeObjectToFile(list);
-        //TODO ajouter ici l'enregistrement des données
     }
 
    public boolean stageExists(String key) {
@@ -200,20 +125,7 @@ public class MainControler extends Controler {
     }
 
 
-    public void writeObjectToFile(Object serObj) {
 
-        try {
-
-            FileOutputStream fileOut = new FileOutputStream(Factory.filepath);
-            ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
-            objectOut.writeObject(serObj);
-            objectOut.close();
-            System.out.println("The Object  was succesfully written to a file");
-
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }
 
 
 

@@ -23,6 +23,6 @@ public class StagePriceMenu extends Menu {
     }
 
     public String getOptionName(String key) {
-        return options.get(key);
+        return (String)options.get(key);
     }
 }

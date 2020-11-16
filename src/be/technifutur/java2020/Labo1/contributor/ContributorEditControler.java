@@ -19,8 +19,10 @@ public class ContributorEditControler extends ContributorControler{
     }
 
     public ContributorEditControler() {
-        controlerList = new TreeMap<>();
         menu = new MenuContributorEdit();
+        type = ControlerType.CONTRIBUTOREDITCONTROLER;
+        generalType.clear();
+        generalType.add(ControlerType.CONTRIBUTOR);
     }
 
     public void run() {
@@ -46,5 +48,10 @@ public class ContributorEditControler extends ContributorControler{
                 break;
 
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Modifier un intervenant";
     }
 }

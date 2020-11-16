@@ -22,7 +22,7 @@ public class Stage extends Event implements Serializable {
     private ContributorList contributorList;
     private StagePriceList stagePriceList;
 
-    public Stage(java.lang.String name){
+    public Stage(String name){
         super(name);
         activityList = new ActivityList();
         contributorList = new ContributorList();
@@ -44,6 +44,10 @@ public class Stage extends Event implements Serializable {
 
     public void addPrice(String priceName) {
         stagePriceList.addPrice(priceName);
+    }
+
+    public void removePrice(String priceName) {
+        stagePriceList.removePrice(priceName);
     }
 
     public void setPrice() {

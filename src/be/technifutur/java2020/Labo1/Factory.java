@@ -5,6 +5,7 @@ import be.technifutur.java2020.Labo1.contributor.*;
 import be.technifutur.java2020.Labo1.stage.*;
 import be.technifutur.java2020.Labo1.stage.StageList;
 
+import javax.naming.ldap.Control;
 import java.io.*;
 import java.util.Arrays;
 
@@ -31,12 +32,71 @@ public class Factory {
     private ContributorVue contributorVue;
     private ActivityRegisterControler activityRegisterControler;
     private StagePriceControler stagePriceControler;
+    private ControlerList controlerList;
+    private StagePlanningDisplayControler stagePlanningDisplayControler;
+    private StageDisplayControler stageDisplayControler;
 
+    public ControlerList getControlerList() {
+        if (controlerList == null) {
+            controlerList = new ControlerList();
+            controlerList.addControler(getMainControler());
+            controlerList.addControler(getStageCreationControler());
+            controlerList.addControler(getStagePriceControler());
+            controlerList.addControler(getStageEditControler());
+            controlerList.addControler(getStageSuppressionControler());
+            controlerList.addControler(getContributorControler());
+            controlerList.addControler(getContributorCreationControler());
+            controlerList.addControler(getContributorEditControler());
+            controlerList.addControler(getActivityCreationControler());
+            controlerList.addControler(getActivityRegisterControler());
+            controlerList.addControler(getStageDisplayControler());
+            controlerList.addControler(getStagePlanningDisplayControler());
+            controlerList.addControler(getActivityControler());
+
+        }
+
+        return controlerList;
+    }
+
+    public void setControlerLists() {
+
+        ControlerList subList = new ControlerList();
+        for (Controler controler : getControlerList().getValues()) {
+
+            for (Controler c : controlerList.getValues()) {
+               System.out.println(controler.getType() + " " + controler.getGeneralType() + " " + c.getType() + " " + c.getGeneralType());
+                if (controler.getGeneralType().last() == c.getGeneralType().first()) {
+                    controler.addControler(c);
+                }
+
+            }
+            subList.getControlerList().clear();
+        }
+    }
+
+    public StageDisplayControler getStageDisplayControler() {
+        if (stageDisplayControler == null) {
+            stageDisplayControler = new StageDisplayControler();
+            stageDisplayControler.setModel(getStageList());
+            stageDisplayControler.setVue(getStageVue());
+        }
+
+        return stageDisplayControler;
+    }
+
+    public StagePlanningDisplayControler getStagePlanningDisplayControler() {
+        if (stagePlanningDisplayControler == null) {
+            stagePlanningDisplayControler = new StagePlanningDisplayControler();
+            stagePlanningDisplayControler.setModel(getStageList());
+            stagePlanningDisplayControler.setVue(getStageVue());
+        }
+        return stagePlanningDisplayControler;
+    }
 
     public StagePriceControler getStagePriceControler() {
         if (stagePriceControler == null) {
             stagePriceControler = new StagePriceControler();
-            stagePriceControler.setMenu(getMenuPrincipal());
+            //stagePriceControler.setMenu(getMenuPrincipal());
             stagePriceControler.setPriceMenu(new StagePriceMenu());
             stagePriceControler.setVue(getStageVue());
             stagePriceControler.setModel(getStageList());
@@ -46,15 +106,11 @@ public class Factory {
 
     public MainControler getMainControler() {
         if(mainControler == null) {
+            getControlerList();
             mainControler = new MainControler();
             mainControler.setVue(getStageVue());
             mainControler.setModel(getStageList());
-            mainControler.setMenu(getMenuPrincipal());
-            mainControler.addControler(ControlerType.STAGECREATIONCONTROLER, getStageCreationControler());
-            mainControler.addControler(ControlerType.STAGEEDITCONTROLER, getStageEditControler());
-            mainControler.addControler(ControlerType.STAGESUPPRESSIONCONTROLER, getStageSuppressionControler());
-            mainControler.addControler(ControlerType.ACTIVITYCONTROLER, getActivityControler());
-            mainControler.addControler(ControlerType.CONTRIBUTORCONTROLER, getContributorControler());
+            //mainControler.setMenu(getMenuPrincipal());
         }
         return mainControler;
     }
@@ -68,34 +124,9 @@ public class Factory {
     }
 
     public StageList getStageList() {
-        //TODO ajouter ici le chargement du fichier
         if (stageList == null) {
-            try
-            {
-                // Reading the object from a file
-                FileInputStream file = new FileInputStream(filepath);
-                ObjectInputStream in = new ObjectInputStream(file);
-
-                // Method for deserialization of object
-                stageList = (StageList)in.readObject();
-
-                in.close();
-                file.close();
-
-                System.out.println("Object has been deserialized ");
-            } catch(IOException ex)
-            {
-                System.out.println("IOException is caught");
-                ex.printStackTrace();
-                stageList = new StageList();
-
-            } catch(ClassNotFoundException ex)
-            {
-                System.out.println("ClassNotFoundException is caught");
-                stageList = new StageList();
-            }
-           // stageList = new StageList();
-            //stageList.setContributorList(getContributorList());
+            stageList = new StageList();
+            stageList.setContributorList(getContributorList());
         }
         return stageList;
     }
@@ -113,7 +144,6 @@ public class Factory {
             stageCreationControler = new StageCreationControler();
             stageCreationControler.setVue(getStageVue());
             stageCreationControler.setModel(getStageList());
-            stageCreationControler.addControler(ControlerType.STAGEPRICECONTROLER, getStagePriceControler());
         }
         return stageCreationControler;
     }
@@ -124,8 +154,8 @@ public class Factory {
             stageEditControler.setEditMenu(new StageEditMenu());
             stageEditControler.setVue(getStageVue());
             stageEditControler.setModel(getStageList());
-            stageEditControler.setMenu(getMenuPrincipal());
-            stageEditControler.addControler(ControlerType.MAINCONTROLER, getMainControler());
+           // stageEditControler.setMenu(getMenuPrincipal());
+
         }
         return stageEditControler;
     }
@@ -133,6 +163,8 @@ public class Factory {
     public StageSuppressionControler getStageSuppressionControler() {
         if (stageSuppressionControler == null) {
             stageSuppressionControler = new StageSuppressionControler();
+            stageSuppressionControler.setModel(getStageList());
+            stageSuppressionControler.setVue(getStageVue());
         }
         return stageSuppressionControler;
     }
@@ -140,12 +172,9 @@ public class Factory {
     public ActivityControler getActivityControler() {
         if (activityControler == null) {
             activityControler = new ActivityControler();
-            activityControler.setMenu(getActivityMenu());
             activityControler.setVue(getActivityVue());
             activityControler.setModel(getStageList());
-            activityControler.addControler(ControlerType.ACTIVITYCREATIONCONTROLER, getActivityCreationControler());
-            activityControler.addControler(ControlerType.MAINCONTROLER, getMainControler());
-            activityControler.addControler(ControlerType.ACTIVITYREGISTERCONTROLER, getActivityRegisterControler());
+            activityControler.addControler(getMainControler());
 
         }
         return activityControler;
@@ -158,6 +187,7 @@ public class Factory {
             activityRegisterControler.setModel(getStageList());
             activityRegisterControler.setVue(getActivityVue());
             activityRegisterControler.setContributorList(getContributorList());
+            activityRegisterControler.addControler(getActivityControler());
         }
         return activityRegisterControler;
     }
@@ -182,6 +212,7 @@ public class Factory {
             activityCreationControler = new ActivityCreationControler();
             activityCreationControler.setModel(getStageList());
             activityCreationControler.setVue(getActivityVue());
+            activityCreationControler.addControler(getActivityControler());
         }
         return activityCreationControler;
     }
@@ -199,9 +230,7 @@ public class Factory {
             contributorControler.setVue(getContributorVue());
             contributorControler.setModel(getContributorList());
             contributorControler.setModel(getStageList());
-            contributorControler.addControler(ControlerType.CONTRIBUTORCREATIONCONTROLER, getContributorCreationControler());
-            contributorControler.addControler(ControlerType.CONTRIBUTOREDITCONTROLER, getContributorEditControler());
-            contributorControler.addControler(ControlerType.MAINCONTROLER, getMainControler());
+            contributorControler.addControler(getMainControler());
 
         }
         return contributorControler;
@@ -212,6 +241,7 @@ public class Factory {
             contributorEditControler = new ContributorEditControler();
             contributorEditControler.setVue(contributorVue);
             contributorEditControler.setModel(getContributorList());
+
         }
         return contributorEditControler;
     }
@@ -222,7 +252,7 @@ public class Factory {
             contributorCreationControler.setVue(getContributorVue());
             contributorCreationControler.setModel(getContributorList());
             contributorCreationControler.setModel(getStageList());
-            contributorCreationControler.addControler(ControlerType.CONTRIBUTOREDITCONTROLER, getContributorEditControler());
+            contributorCreationControler.addControler(getContributorControler());
         }
         return contributorCreationControler;
     }
@@ -244,87 +274,12 @@ public class Factory {
         return stageEditMenu;
     }
 
-    public TestUser getTestUser() {
-        String[] testInput = new String[]{
-                "1",
-                "Stage de jeu de rôle",//stage
-                "2020 12 12 09 00",
-                "2020 12 18 18 00",
-                "5",
-                "Stage de jeu de rôle",//stage
-                "Création de personnages",
-                "2020 12 12 09 00",
-                "120",
-                "6",
-                "Stage de jeu de rôle"
-        };
-        return new TestUser(Arrays.asList(testInput).iterator());
-    }
-
-    private void openFile() {
-        Stage test = null;
-        try
-        {
-            // Reading the object from a file
-            FileInputStream file = new FileInputStream(filepath);
-            ObjectInputStream in = new ObjectInputStream(file);
-
-            // Method for deserialization of object
-            test = (Stage)in.readObject();
-
-            in.close();
-            file.close();
-
-            System.out.println("Object has been deserialized ");
-        }
-
-        catch(IOException ex)
-        {
-            System.out.println("IOException is caught");
-            ex.printStackTrace();
-        }
-
-        catch(ClassNotFoundException ex)
-        {
-            System.out.println("ClassNotFoundException is caught");
-        }
-
-    }
 
 
-    public static void main(String[] args) {
-        StageList testAfter = null;
-        Factory factory = new Factory();
-        factory.getMainControler();
-
-        try
-        {
-            // Reading the object from a file
-            FileInputStream file = new FileInputStream(filepath);
-            ObjectInputStream in = new ObjectInputStream(file);
-
-            // Method for deserialization of object
-            testAfter = (StageList)in.readObject();
-
-            in.close();
-            file.close();
-
-            System.out.println("Object has been deserialized ");
-        }
-
-        catch(IOException ex)
-        {
-            System.out.println("IOException is caught");
-            ex.printStackTrace();
-        }
-
-        catch(ClassNotFoundException ex)
-        {
-            System.out.println("ClassNotFoundException is caught");
-        }
 
 
-        System.out.println(testAfter.getList().size());
+
+
 
        /* StageList list = new StageList();
         list.add("bla");
@@ -344,7 +299,7 @@ public class Factory {
         vue.displayStageSchedule("bla"); */
 
 
-    }
+
 }
 
 

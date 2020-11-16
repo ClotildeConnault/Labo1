@@ -1,15 +1,17 @@
 package be.technifutur.java2020.Labo1.stage;
 
-import be.technifutur.java2020.Labo1.Controler;
 import be.technifutur.java2020.Labo1.ControlerType;
 import be.technifutur.java2020.Labo1.MainControler;
-import be.technifutur.java2020.Labo1.Vue;
 
-import java.time.DateTimeException;
 import java.util.Scanner;
 
 public class StageCreationControler extends MainControler {
 
+    public StageCreationControler() {
+        type = ControlerType.STAGECREATIONCONTROLER;
+        generalType.clear();
+        generalType.add(ControlerType.STAGE);
+    }
     public void run(){
 
         Scanner scan = new Scanner(System.in);
@@ -30,13 +32,18 @@ public class StageCreationControler extends MainControler {
         } while (!isONValid(input));
 
         if (input.equalsIgnoreCase("o")) {
-            ((StagePriceControler)controlerList.get(ControlerType.STAGEPRICECONTROLER)).setActiveStage(nomStage);
-            controlerList.get(ControlerType.STAGEPRICECONTROLER).run();
+            ((StagePriceControler) controlerList.getControler(ControlerType.STAGEPRICECONTROLER)).setActiveStage(nomStage);
+            controlerList.getControler(ControlerType.STAGEPRICECONTROLER).run();
         }
 
         vue.succes();
         vue.displayStage(nomStage);
 
+    }
+
+    @Override
+    public String toString() {
+        return "Créer un stage";
     }
 
 }

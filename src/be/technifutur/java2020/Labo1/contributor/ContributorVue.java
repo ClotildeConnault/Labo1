@@ -63,4 +63,9 @@ public class ContributorVue extends Vue {
     public void demandeModifON() {
         System.out.println("Voulez-vous modifier cet intervenant ? O/N");
     }
+
+    public void noStages() {
+        System.out.println("Il n'y a aucun stage existant. Créez d'abord un stage pour" +
+                " pouvoir inscrire un intervenant \n");
+    }
 }

@@ -8,8 +8,6 @@ import java.util.TreeMap;
 public class ActivityControler extends Controler {
 
     protected ActivityVue vue;
-    private ActivityMenu menu;
-    protected TreeMap<ControlerType, Controler> controlerList;
     protected StageList stageList;
     protected String activeStage;
     protected ActivityList activityList;
@@ -19,17 +17,21 @@ public class ActivityControler extends Controler {
     }
 
     public ActivityControler() {
-        controlerList = new TreeMap<>();
+        type = ControlerType.ACTIVITYCONTROLER;
+        generalType.add(ControlerType.STAGE);
+        generalType.add(ControlerType.ACTIVITY);
     }
 
-    public void setActiveStage(String activeStage) {
-        this.activeStage = activeStage;
-        setActivityList();
-        for (Controler c : controlerList.values()) {
+    public void setActiveStage(String stageName) {
+        this.activeStage = stageName;
+
+
+      /*  for (Controler c : controlerList.getValues()) {
+            System.out.println(c);
             if (c instanceof ActivityControler) {
                 ((ActivityControler) c).setActiveStage(activeStage);
             }
-        }
+        } */
     }
 
     @Override
@@ -37,65 +39,56 @@ public class ActivityControler extends Controler {
         this.vue = (ActivityVue) vue;
     }
 
-    public void setMenu(ActivityMenu menu) {
-        this.menu = menu;
-    }
-
     public void setModel(StageList list) {
         this.stageList = list;
     }
 
-    public void addControler(ControlerType key, Controler controler) {
-        controlerList.put(key, controler);
-    }
-
     public void run() {
         String input = null;
+        Menu menu = new Menu(controlerList.getControlerList());
+
+        if (!stageList.getList().isEmpty()) {
+            vue.consigneActivityStage();
+            vue.displayStages();
+            String stageName = scan.nextLine();
+
+            if (!stageList.getList().containsKey(stageName)) {
+                vue.doesNotExist();
+            }
+            else {
+                this.activeStage = stageName;
+                ((ActivityControler)controlerList.getControler(ControlerType.ACTIVITYCREATIONCONTROLER)).setActiveStage(stageName);
+                ((ActivityControler)controlerList.getControler(ControlerType.ACTIVITYREGISTERCONTROLER)).setActiveStage(stageName);
+                setActivityList();
+                vue.setActiveStage(activeStage);
+            }
+        }
+        else {
+            vue.noStages();
+            controlerList.getControler(ControlerType.MAINCONTROLER).run();
+        }
+
+
         do {
-            vue.setActiveStage(activeStage);
-            menu.displayMenuPrincipal();
+            menu.displayMenu();
             input = null;
 
             do {
                 input = menu.getChoice();
                 if (input == null) {
                     vue.erreurInputMenu();
-                    menu.displayMenuPrincipal();
+                    menu.displayMenu();
                 }
             } while (input == null);
 
-            switch (input) {
-                case "1":
-                    controlerList.get(ControlerType.ACTIVITYCREATIONCONTROLER).run();
-                    break;
-                case "2":
-                    controlerList.get(ControlerType.ACTIVITYMODIFCONTROLER).run();
-                    break;
-                case "3":
-                    controlerList.get(ControlerType.STAGESUPPRESSIONCONTROLER).run();
-                    break;
-                case "4":
-                    vue.displayActivities();
-                    break;
-                case "5":
-                    vue.selectActivity();
-                    input = scan.nextLine();
-                    if (existsActivity(input)) {
-                        ((ActivityRegisterControler)controlerList.get(ControlerType.ACTIVITYREGISTERCONTROLER)).setActiveActivity(input);
-                        controlerList.get(ControlerType.ACTIVITYREGISTERCONTROLER).run();
-                    }
-                    break;
-                case "q" :
-                    controlerList.get(ControlerType.MAINCONTROLER).run();
-
-            }
+            ((Controler)menu.getOption(input)).run();
 
         } while (!input.equalsIgnoreCase("q"));
 
-        vue.messageSortie();
+
     }
 
-    private boolean existsActivity(String key) {
+    protected boolean existsActivity(String key) {
         boolean exists = true;
         if (!stageList.getList().get(activeStage).existsActivity(key)){
             exists = false;
@@ -104,4 +97,8 @@ public class ActivityControler extends Controler {
         return exists;
     }
 
+    @Override
+    public String toString() {
+        return "Gérer les activités";
+    }
 }

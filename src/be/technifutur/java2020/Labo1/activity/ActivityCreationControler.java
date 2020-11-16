@@ -1,4 +1,5 @@
 package be.technifutur.java2020.Labo1.activity;
+import be.technifutur.java2020.Labo1.ControlerType;
 import be.technifutur.java2020.Labo1.Vue;
 import be.technifutur.java2020.Labo1.stage.StageList;
 import java.time.DateTimeException;
@@ -9,6 +10,13 @@ public class ActivityCreationControler extends ActivityControler {
 
     private String activityKey;
     private LocalDateTime dateTest;
+
+
+    public ActivityCreationControler() {
+        type = ControlerType.ACTIVITYCREATIONCONTROLER;
+        generalType.clear();
+        generalType.add(ControlerType.ACTIVITY);
+    }
 
     public void setModel(StageList list) {
         this.stageList = list;
@@ -25,8 +33,10 @@ public class ActivityCreationControler extends ActivityControler {
 
             vue.consigneNomActivity();
             activityKey = scan.nextLine();
-            ActivityList activityList = stageList.getActivities(activeStage);
+
+
             stageList.addActivity(activeStage, activityKey);
+        this.activityList = stageList.getActivities(activeStage);
             boolean dateTimeException = false;
             String input = null;
 
@@ -100,6 +110,11 @@ public class ActivityCreationControler extends ActivityControler {
             System.out.println("La durée de l'activité doit être comprise dans la durée du stage");
         }
         return isValid;
+    }
+
+    @Override
+    public String toString() {
+        return "Créer une activité";
     }
 
 }

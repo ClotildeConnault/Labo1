@@ -11,8 +11,13 @@ public class Main {
 
         StageList testAfter = null;
         Factory factory = new Factory();
+        factory.getControlerList();
+        factory.setControlerLists();
         factory.getMainControler().run();
 
+        //TODO créer des (sous)ControlerList pour chaque Controler, qui get ses controlers dans la liste générale?
+        // nouveau sous-controler -> l'ajouter à ControlerList générale
+        // + l'ajouter à la sous ControlerList (dans la factory pour les deux)
         //TODO erreur si nom stage existe déjà !
         //TODO finir la serialization (regrouper les modèles dans un objet pour la sauvegarde, les récupérer et les réinjecter à l'ouverture)
 //TODO regroupement du code des Event (bosser sur les toString et l'affichage)

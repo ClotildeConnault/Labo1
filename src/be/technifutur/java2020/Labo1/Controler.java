@@ -1,29 +1,44 @@
 package be.technifutur.java2020.Labo1;
 
+import be.technifutur.java2020.Labo1.stage.StageList;
+
 import java.util.Scanner;
+import java.util.Set;
+import java.util.TreeMap;
+import java.util.TreeSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
 public abstract class Controler implements Runnable {
 
-    //protected StageList list;
     protected Pattern datePattern = Pattern.compile("[0-9][0-9][0-9][0-9]\\h[0-1][0-9]\\h[0-3][0-9]\\h[0-9][0-9]\\h[0-9][0-9]");
     protected Pattern dureePattern = Pattern.compile("[0-9]+");
     protected Scanner scan = new Scanner(System.in);
-    protected User user;
+    protected ControlerType type;
+    protected TreeSet<ControlerType> generalType;
+    protected ControlerList controlerList;
 
-    //public void setModel(StageList list) {
-    //    this.list = list;
-    //}
-
-    public void setUser(User user) {
-        this.user = user;
+    public Controler() {
+        generalType = new TreeSet<>();
+        controlerList = new ControlerList();
     }
 
-    public abstract void setVue(Vue vue);
+    public void setControlerList(ControlerList controlerList) {
+        this.controlerList = controlerList;
+    }
 
-    //public abstract void setMenu(Menu menu);
+    public ControlerType getType() {
+        return type;
+    }
+    public TreeSet<ControlerType> getGeneralType() {return generalType;}
+
+    public abstract void setVue(Vue vue);
+    public abstract void setModel(StageList stageList);
+
+    public void addControler(Controler controler) {
+        controlerList.addControler(controler);
+    }
 
     protected boolean isDateFormatValid(String input) throws PatternSyntaxException {
         Matcher matcher = this.datePattern.matcher(input);

@@ -1,5 +1,6 @@
 package be.technifutur.java2020.Labo1.activity;
 
+import be.technifutur.java2020.Labo1.Event;
 import be.technifutur.java2020.Labo1.Vue;
 import be.technifutur.java2020.Labo1.stage.StageList;
 
@@ -57,8 +58,34 @@ public class ActivityVue extends Vue {
                 );
     }
 
+    public void consigneActivityStage() {
+        System.out.println("Entrez le nom du stage dont vous voulez gérer les activités");
+    }
+
+    public void displayStages() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+
+        System.out.println("Liste des stages");
+        System.out.println();
+        System.out.println("nom du stage" + "   " + "début du stage" + "   " + "fin du stage");
+
+
+        for (Map.Entry<String, ? extends Event> entry : stageList.getList().entrySet()) {
+            System.out.print(
+                    entry.getKey() + " " +
+                            stageList.getDateDebut(entry.getKey()).format(formatter) + " " +
+                            stageList.getDateFin(entry.getKey()).format(formatter)
+            );
+            System.out.println();
+        }
+    }
+
     public void consigneDateDebut() {
         System.out.println("Entrez une date et une heure de début pour l'activité' (format aaaa mm jj hh mm)");
+    }
+
+    public void noStages() {
+        System.out.println("Il n'y a aucun stage existant \n");
     }
 
     public void consigneDuree() {

@@ -114,6 +114,9 @@ public class StageVue extends Vue {
     public void demandeSupprDiscount() {
         System.out.println("Voulez-vous supprimer une réduction ? (O/N)");
     }
+    public void choixSupprDiscount() {
+        System.out.println("Quelle réduction voulez-vous supprimer ?");
+    }
 
     public void demandeDiscount() {
         System.out.println("Voulez-vous ajouter des réductions pour ce stage? (O/N)");
@@ -131,13 +134,6 @@ public class StageVue extends Vue {
         System.out.println("Entrez le nom du stage que vous souhaitez modifier");
     }
 
-    public void consigneActivityStage() {
-        System.out.println("Entrez le nom du stage dont vous voulez gérer les activités");
-    }
-
-    public void consigneChoixStageModif() {
-        System.out.println("Entrez le nom du stage que vous souhaitez modifier");
-    }
 
     public void consigneAffichePlanning() {
         System.out.println("Entrez le nom du stage dont vous voulez afficher le planning");

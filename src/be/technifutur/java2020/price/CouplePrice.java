@@ -3,6 +3,12 @@ package be.technifutur.java2020.price;
 public class CouplePrice implements Price {
 
     private double price;
+
+    @Override
+    public String toString() {
+        return "Prix de couple";
+    }
+
     private final String name = "Prix de couple";
 
     public String getName() {

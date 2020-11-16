@@ -3,15 +3,27 @@ package be.technifutur.java2020.Labo1.stage;
 import be.technifutur.java2020.Labo1.*;
 import be.technifutur.java2020.price.StagePriceList;
 
+
 public class StageEditControler extends MainControler {
 
     private StageEditMenu editMenu;
     private String activeStage;
 
-    public void setEditMenu(StageEditMenu editMenu) {
-        this.editMenu = editMenu;
+    @Override
+    public String toString() {
+        return "Modifier un stage";
     }
 
+    public void setEditMenu(StageEditMenu editMenu) {
+        this.editMenu = editMenu;
+        type = ControlerType.STAGEEDITCONTROLER;
+        generalType.clear();
+        generalType.add(ControlerType.STAGE);
+    }
+
+    public void setActiveStage(String stageName) {
+        activeStage = stageName;
+    }
 
     @Override
     public void run() {
@@ -47,23 +59,33 @@ public class StageEditControler extends MainControler {
                         } while (!isONValid(input));
 
                         if (input.equalsIgnoreCase("o")) {
-
+                            ((StagePriceControler) controlerList.getControler(ControlerType.STAGEPRICECONTROLER)).setActiveStage(activeStage);
+                            controlerList.getControler(ControlerType.STAGEPRICECONTROLER).run();
                         }
 
                         if (!isEmptyStagePriceList()) {
+                            String choice;
                             do {
                                 vue.demandeSupprDiscount();
                                 input = scan.nextLine();
                             } while (!isONValid(input));
 
                             if (input.equalsIgnoreCase("o")) {
+                                Menu discountMenu = new Menu(list.getPriceList(activeStage).getStagePriceList());
 
+                                do {
+                                    vue.choixSupprDiscount();
+                                    discountMenu.displayMenu();
+                                    choice = discountMenu.getChoice();
+                                } while (choice == null);
+
+                                list.getPriceList(activeStage).removePrice((String)discountMenu.getOption(choice));
                             }
                         }
                         run();
                         break;
                     case "Q":
-                        controlerList.get(ControlerType.MAINCONTROLER).run();
+                        controlerList.getControler(ControlerType.MAINCONTROLER).run();
                         break;
                 }
 

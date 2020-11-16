@@ -1,11 +1,18 @@
 package be.technifutur.java2020.Labo1.stage;
 
+import be.technifutur.java2020.Labo1.ControlerType;
 import be.technifutur.java2020.Labo1.MainControler;
 
 public class StagePriceControler extends MainControler {
 
     private StagePriceMenu priceMenu;
     private String activeStage;
+
+    public StagePriceControler() {
+        type = ControlerType.STAGEPRICECONTROLER;
+        generalType.clear();
+        generalType.add(ControlerType.STAGE);
+    }
 
     public void setPriceMenu(StagePriceMenu menu) {
         this.priceMenu = menu;
@@ -37,5 +44,10 @@ public class StagePriceControler extends MainControler {
         }
 
 
+    }
+
+    @Override
+    public String toString() {
+        return "Gérer les prix d'un stage";
     }
 }

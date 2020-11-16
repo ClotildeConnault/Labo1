@@ -9,15 +9,19 @@ public class ContributorControler extends MainControler {
 
     protected ContributorVue vue;
     protected ContributorList contributorList;
-    protected MenuContributor menu;
-    protected TreeMap<ControlerType, Controler> controlerList;
+    protected Menu menu;
     protected String activeStage;
+
+    public ContributorControler() {
+        type = ControlerType.CONTRIBUTORCONTROLER;
+        generalType.clear();
+        generalType.add(ControlerType.STAGE);
+        generalType.add(ControlerType.CONTRIBUTOR);
+    }
 
     @Override
     public void setVue(Vue vue) {
         this.vue = (ContributorVue)vue;
-        menu = new MenuContributor();
-        controlerList = new TreeMap<>();
     }
 
     public void setModel(ContributorList list) {
@@ -32,23 +36,33 @@ public class ContributorControler extends MainControler {
 
     public void setActiveStage(String stage) {
         activeStage = stage;
-        for (Controler c : controlerList.values()) {
+        for (Controler c : controlerList.getValues()) {
             if (c instanceof ContributorControler) {
                 ((ContributorControler)c).setActiveStage(stage);
             }
         }
     }
 
-    public void addControler(ControlerType key, Controler controler) {
-        controlerList.put(key, controler);
-    }
-
 
     @Override
     public void run() {
 
+        String input;
+
+        menu = new Menu(controlerList.getControlerList());
         menu.displayMenu();
-        switch(menu.getChoice()) {
+
+        do {
+            input = menu.getChoice();
+            if (input == null) {
+                vue.erreurInputMenu();
+                menu.displayMenu();
+            }
+        } while (input == null);
+
+        ((Controler)menu.getOption(input)).run();
+
+        /*switch(menu.getChoice()) {
             case "1":
                 controlerList.get(ControlerType.CONTRIBUTORCREATIONCONTROLER).run();
                 break;
@@ -64,10 +78,12 @@ public class ContributorControler extends MainControler {
                 controlerList.get(ControlerType.MAINCONTROLER).run();
                 break;
 
-        }
-
-
+        } */
 
     }
 
+    @Override
+    public String toString() {
+        return "Gérer les participations";
+    }
 }

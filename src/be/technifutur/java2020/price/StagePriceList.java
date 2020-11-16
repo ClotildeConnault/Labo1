@@ -16,6 +16,10 @@ public class StagePriceList {
         stagePriceList.put(priceName, priceList.getPrice(priceName));
     }
 
+    public void removePrice(String priceName) {
+        stagePriceList.remove(priceName);
+    }
+
     public HashMap<String, Price> getStagePriceList() {
         return stagePriceList;
     }

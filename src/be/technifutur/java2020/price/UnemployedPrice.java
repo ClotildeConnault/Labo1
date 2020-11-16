@@ -17,4 +17,9 @@ public class UnemployedPrice implements Price {
     public double getPrice() {
         return price;
     }
+
+    @Override
+    public String toString() {
+        return "Prix demandeur d'emploi";
+    }
 }

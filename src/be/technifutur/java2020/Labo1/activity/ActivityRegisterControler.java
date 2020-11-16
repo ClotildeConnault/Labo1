@@ -10,6 +10,12 @@ public class ActivityRegisterControler extends ActivityControler {
     private ActivityRegisterMenu menu;
     private ContributorList contributorList;
 
+    public ActivityRegisterControler() {
+        type = ControlerType.ACTIVITYREGISTERCONTROLER;
+        generalType.clear();
+        generalType.add(ControlerType.ACTIVITY);
+    }
+
     public void setActiveActivity(String activityName) {
         activeActivity = activityName;
     }
@@ -32,24 +38,39 @@ public class ActivityRegisterControler extends ActivityControler {
 
     public void run() {
         String input;
-        menu.displayMenu();
-        switch (menu.getChoice()) {
-            case "1":
-                vue.consigneContributorName();
-                input = scan.nextLine();
-                if (existsContributor(input)) {
-                    activityList.register(activeActivity, contributorList.getContributor(input));
-                }
+        vue.selectActivity();
+        input = scan.nextLine();
+        if (existsActivity(input)) {
+            setActiveActivity(input);
 
-                break;
-            case "2":
-                break;
-            case "3":
+            menu.displayMenu();
+            switch (menu.getChoice()) {
+                case "1":
+                    vue.consigneContributorName();
+                    input = scan.nextLine();
+                    if (existsContributor(input)) {
+                        activityList.register(activeActivity, contributorList.getContributor(input));
+                    }
 
-                break;
-            case "Q":
-                super.run();
-                break;
+                    break;
+                case "2":
+                    break;
+                case "3":
+
+                    break;
+                case "Q":
+                    controlerList.getControler(ControlerType.MAINCONTROLER).run();
+                    break;
+            }
+
         }
+
+
+
+
+    }
+    @Override
+    public String toString() {
+        return "Gérer les inscriptions";
     }
 }
